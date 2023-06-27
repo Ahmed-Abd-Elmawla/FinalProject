@@ -1,0 +1,9 @@
+<div class="card h-100">
+    <img [src]="oneOfCards.image" class="card-img-top" style="height: 20rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ oneOfCards.title }}</h5>
+      <!-- <button (click)="goToCardDetails(oneOfCards.id)" class="btn btn-primary my-3">View Details</button> -->
+      <a [routerLink]="['/home2card-details', oneOfCards.id]" class="btn btn-primary my-3">View Details</a>
+    </div>
+  </div>
+  
