@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -22,19 +23,35 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post;
-        $post->user_id  = $request->input('user_id');
-        $post->title = $request->input('title');
-        $post->description=$request->input('description');
-        $post->price = $request->input('price');
-        $post->discount = $request->input('discount');
-        $post->location = $request->input('location');
-        $post->cover = $request->input('cover');
-        $post->images = $request->input('images');
-        $post->save();
-
-        return response()->json(['message' => 'Post created successfully', 'post' => $post]);
-
+        $data = $request->validate([
+            "user_id" =>'required|integer',
+            "title"=>'required|string',
+            "description"=>"required",
+            "price"=>"required|numeric",
+            "discount"=>"nullable|numeric",
+            "location"=>"required|string",
+            "images"=>"required|array|min:5",
+            "images.*"=>"required|image"
+        ]);
+        $images=[];
+        if($request->has('images')){
+            $images_ = $request->file('images');
+            foreach ($images_ as  $image){
+                $image_name = time().'_'.$image->getClientOriginalName();
+                $image->move(public_path('post_images'),$image_name);
+                $images[]=$image_name;
+        }
+    }
+    $new_post = Post::create([
+        'user_id'=>$data["user_id"],
+        'title'=>$data["title"],
+        'description'=>$data["description"],
+        'price'=>$data["price"],
+        'discount'=>$data["discount"]??0,
+        'location'=>$data["location"],
+        'images'=>$images
+    ]);
+        return response()->json(['message' => 'Post created successfully', 'post' => $new_post]);
     }
 
     /**
@@ -49,19 +66,42 @@ class PostController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Post $post)
+
     {
-        $post->title = $request->input('title');
-        $post->description=$request->input('description');
-        $post->price = $request->input('price');
-        $post->discount = $request->input('discount');
-        $post->location = $request->input('location');
-        if($request->input('cover')){
-            $post->cover = $request->input('cover');
+        $data = $request->validate([
+            "title"=>'required|string',
+            "description"=>"required",
+            "price"=>"required|numeric",
+            "discount"=>"nullable|numeric",
+            "location"=>"required|string",
+            "images"=>"nullable|array",
+            "images.*"=>"nullable|image"
+        ]);
+        $post->update([
+            'title'=>$data["title"],
+            'description'=>$data["description"],
+            'price'=>$data["price"],
+            'discount'=>$data["discount"]??0,
+            'location'=>$data["location"]
+        ]);
+        $images=[];
+        if($request->has('images')){
+            foreach ($post->images as $img) {
+                $imagePath = public_path('post_images/'.$img);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+            $images_ = $request->input('images');
+            foreach ($images_ as  $image){
+                $image_name = time().'_'.$image->getClientOriginalName();
+                $image->move(public_path('post_images'),$image_name);
+                $images[]=$image_name;
         }
-        if($request->input('images')){
-            $post->images = $request->input('images');
-        }
-        $post->save();
+        $post->update([
+            'images'=>$images
+        ]);
+    }
         return response()->json(['message' => 'Post updated successfully', 'post' => $post]);
     }
 
@@ -70,6 +110,14 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if (!empty($post->images)) {
+            foreach ($post->images as $image) {
+                $imagePath = public_path('post_images/'.$image);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+        }
         $post->delete();
         return response()->json(['message' => 'Post deleted successfully']);
     }
