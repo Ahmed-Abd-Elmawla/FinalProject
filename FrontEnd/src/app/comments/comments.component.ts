@@ -17,9 +17,10 @@ export class CommentsComponent {
 
   addComment(commentText: string): void {
     const newComment: Comment = {
-      id: 0, // The ID will be assigned by the server upon creation
-      user_id: 0, // Replace with the actual user ID
-      post_id: 0, // Replace with the actual post ID
+      id: 0, 
+      user_id: 0, 
+      owner_id: 0,
+      post_id: 0, 
       comment: commentText,
       created_at: '',
       updated_at: ''

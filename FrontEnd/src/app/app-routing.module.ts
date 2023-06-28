@@ -7,12 +7,12 @@ import {Home2detailsComponent} from './home2details/home2details.component';
 
 const routes: Routes = [
   {
-    path:"comments",
-    component: CommentsComponent
+    path: '',
+    component: HomeComponent
   },
   {
-    path: 'home',
-    component: HomeComponent
+    path:"comments",
+    component: CommentsComponent
   },
   { path: 'home2',
    component: Home2Component 
