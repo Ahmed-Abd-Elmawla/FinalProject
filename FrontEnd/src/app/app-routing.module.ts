@@ -8,12 +8,12 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 
 const routes: Routes = [
   {
-    path:"comments",
-    component: CommentsComponent
-  },
-  {
     path: '',
     component: HomeComponent
+  },
+  {
+    path:"comments",
+    component: CommentsComponent
   },
   { path: 'home2',
    component: Home2Component
