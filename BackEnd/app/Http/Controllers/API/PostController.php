@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -68,6 +69,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
 
     {
+        // dd($request->all());
         $data = $request->validate([
             "title"=>'required|string',
             "description"=>"required",
@@ -75,7 +77,7 @@ class PostController extends Controller
             "discount"=>"nullable|numeric",
             "location"=>"required|string",
             "images"=>"nullable|array",
-            "images.*"=>"nullable|image"
+            "images.*"=>"nullable"
         ]);
         $post->update([
             'title'=>$data["title"],
@@ -84,6 +86,7 @@ class PostController extends Controller
             'discount'=>$data["discount"]??0,
             'location'=>$data["location"]
         ]);
+
         $images=[];
         if($request->has('images')){
             foreach ($post->images as $img) {
@@ -92,7 +95,7 @@ class PostController extends Controller
                     unlink($imagePath);
                 }
             }
-            $images_ = $request->input('images');
+            $images_ = $request->file('images');
             foreach ($images_ as  $image){
                 $image_name = time().'_'.$image->getClientOriginalName();
                 $image->move(public_path('post_images'),$image_name);
@@ -101,8 +104,8 @@ class PostController extends Controller
         $post->update([
             'images'=>$images
         ]);
-    }
         return response()->json(['message' => 'Post updated successfully', 'post' => $post]);
+    }
     }
 
     /**

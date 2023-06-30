@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {Home2Component} from './home2/home2.component';
 import {Home2detailsComponent} from './home2details/home2details.component';
 import {ChatComponent} from './chat/chat.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 const routes: Routes = [
   {
@@ -16,13 +17,17 @@ const routes: Routes = [
     component: CommentsComponent
   },
   { path: 'home2',
-   component: Home2Component 
+   component: Home2Component
   },
   { path: 'home2card-details/:id',
    component: Home2detailsComponent
   },
   { path: 'chat',
    component: ChatComponent
+},
+  {
+    path: 'user-profile',
+    component: UserprofileComponent,
   }
 ];
 
