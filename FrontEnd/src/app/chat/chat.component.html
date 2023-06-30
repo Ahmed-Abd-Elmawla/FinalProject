@@ -1,0 +1,19 @@
+<div class="container card mt-5 shadow" style="background-color: rgba(152, 191, 228, 0.705);">
+  <img [src]="logoUrl" style="height: 5rem; width: 5rem;">
+  
+  <div class="d-flex bg-white chat-container">
+    <div class="list-group list-group-flush border-bottom scrollarea" style="min-height: 350px;">
+      <div class="list-group-item rounded-pill d-inline-flex text-wrap text-white bg-primary m-1" *ngFor="let msg of messages" style="display: inline;">
+        <span>{{ msg.message }}</span>
+      </div>
+    </div>
+  </div>
+
+  <form (submit)="submit()" class="d-flex chat-input">
+    <input type="text" placeholder="Type a message..." class="form-control m-2" [(ngModel)]="message">
+    <button type="submit" class="btn btn-primary m-2">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </form>
+</div>
+

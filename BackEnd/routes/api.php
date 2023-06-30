@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\ChatController;
+use Illuminate\Support\Facades\Event;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,3 +28,5 @@ Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 
 
 Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);
+
+Route::post('messages', [ChatController::class, 'sendMessage']);
