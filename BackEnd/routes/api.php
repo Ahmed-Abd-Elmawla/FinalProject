@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PremiumPostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,10 @@ Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 
 
 Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);
+
+
+
+Route::get('/posts/{post}/premium', [PremiumPostsController::class, 'show'])->name('posts.premium.show');
+Route::post('/posts/{post}/premium', [PremiumPostsController::class, 'store'])->name('posts.premium.store');
+Route::put('/posts/{post}/premium', [PremiumPostsController::class, 'update'])->name('posts.premium.update');
+Route::delete('/posts/{post}/premium', [PremiumPostsController::class, 'destroy'])->name('posts.premium.destroy');

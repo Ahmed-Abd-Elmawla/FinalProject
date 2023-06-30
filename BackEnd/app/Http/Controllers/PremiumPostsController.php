@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PremiumPost;
 use Illuminate\Http\Request;
 
 class PremiumPostsController extends Controller
@@ -18,7 +19,7 @@ class PremiumPostsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request , Post $post)
     {
         $validatedData = $request->validate([
             'expire_date' => ['required', 'date'],
@@ -35,7 +36,7 @@ class PremiumPostsController extends Controller
      */
     public function show(Post $post)
     {
-        
+
         $premiumPost = $post->premiumPost();
 
         if (!$premiumPost) {
@@ -48,7 +49,7 @@ class PremiumPostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
         $validatedData = $request->validate([
             'expire_date' => ['required', 'date'],
@@ -68,7 +69,7 @@ class PremiumPostsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
         $premiumPost = $post->premiumPost;
 
