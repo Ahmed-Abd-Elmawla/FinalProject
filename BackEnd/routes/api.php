@@ -25,5 +25,10 @@ Route::get('comments/{comment}', [CommentController::class, 'show']);
 Route::put('comments/{comment}', [CommentController::class, 'update']);
 Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 
-
+//Posts Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);
+Route::get('/posts/user/{user_id}', [\App\Http\Controllers\API\PostController::class, 'getByUserId']);
+Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostController::class, 'getByCategoryId']);
+
+//Categories Api's-----------------------------------------------------------------------------------------------------
+Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::class);
