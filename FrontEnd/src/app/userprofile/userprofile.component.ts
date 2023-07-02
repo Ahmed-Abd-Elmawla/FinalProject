@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PostsService } from '../services/posts.service';
-import {
-  NgbModal,
-  NgbModalConfig,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import {
   AbstractControl,
@@ -15,21 +12,9 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-
-function imagesValidator(control: FormControl): {[s: string]: boolean}{
-  const input = document.querySelector('input[type="file"]');
-  if (input instanceof HTMLInputElement && input.files) {
-    const files = input.files;
-    if (files.length < 5) {
-    return {'fileCount': true};
-  }
-  }
-  return {};
-}
-
+import { CategoriesService } from '../services/categories.service';
 @Component({
   selector: 'app-userprofile',
-
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.css'],
   providers: [NgbModalConfig, NgbModal],
@@ -40,19 +25,22 @@ export class UserprofileComponent {
   title!: any;
   description!: any;
   price!: any;
-  discount: any=0;
+  discount: any = 0;
   location!: any;
-  category!:any;
+  category!: any;
   user_id: any = 1;
   allPosts!: any;
-  flag: boolean = true;
-  form!:FormGroup;
+  flag = true;
+  form!: FormGroup;
+  categories!:any;
+  category_id!: any;
 
   constructor(
     config: NgbModalConfig,
     private post: PostsService,
     private modalService: NgbModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private req:CategoriesService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -62,22 +50,41 @@ export class UserprofileComponent {
     this.post.getAllPosts().subscribe((res: any) => {
       (this.allPosts = res), console.log(res);
     });
-//create validation for form----..........................
-    this.form= this.fb.group({
-      title:new FormControl(null,[Validators.required,Validators.minLength(30)]),
-      description:new FormControl(null,[Validators.required,Validators.minLength(50)]),
-      price:new FormControl(null,[Validators.required,Validators.minLength(2),Validators.pattern(/^\d+$/)]),
-      discount:new FormControl(null,[Validators.required,Validators.pattern(/^\d+$/)]),
-      location:new FormControl(null,[Validators.required]),
-      category:new FormControl(null,[Validators.required]),
-      images:new FormControl(null,[Validators.required,imagesValidator])
+
+
+    this.req.getAllCategories().subscribe((res: any) => {
+      (this.categories = res);
     });
-//make all input fields touched to show errors after the form load
-    Object.values(this.form.controls).forEach(control => {
+    //create validation for form--------------------------------------------------------
+    const imagesValidator =
+      this.flag == true ? [Validators.required, this.imagesValidatorFn] : [];
+    this.form = this.fb.group({
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(30),
+      ]),
+      description: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(50),
+      ]),
+      price: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern(/^\d+$/),
+      ]),
+      discount: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(/^\d+$/),
+      ]),
+      location: new FormControl(null, [Validators.required]),
+      category:new FormControl(null,[Validators.required,Validators.pattern(/^\S+$/)]),
+      images: new FormControl(null, imagesValidator),
+    });
+    //make all input fields touched to show errors after the form load
+    Object.values(this.form.controls).forEach((control) => {
       control.markAsTouched();
     });
   }
-
 
   //open create post form-----------------------------------------------------------------------------
   open(content: any) {
@@ -86,6 +93,7 @@ export class UserprofileComponent {
     this.price = null;
     this.discount = 0;
     this.location = null;
+    this.category_id="category name";
     this.modalService.open(content, { size: 'lg', centered: true });
   }
 
@@ -97,7 +105,8 @@ export class UserprofileComponent {
     d: any,
     p: number,
     dis: number,
-    l: any
+    l: any,
+    cat:any
   ) {
     this.flag = false;
     this.post_id = id;
@@ -106,6 +115,7 @@ export class UserprofileComponent {
     this.price = p;
     this.discount = dis;
     this.location = l;
+    this.category_id=cat;
     this.modalService.open(content, { size: 'lg', centered: true });
   }
 
@@ -125,6 +135,7 @@ export class UserprofileComponent {
     formData.set('price', this.price);
     formData.set('discount', this.discount);
     formData.set('location', this.location);
+    formData.set('category_id', this.category_id);
     this.post.createPost(formData).subscribe(
       (res) => {
         {
@@ -236,5 +247,17 @@ export class UserprofileComponent {
         );
       }
     });
+  }
+
+  //custom validator for create images
+  imagesValidatorFn(control: AbstractControl): ValidationErrors | null {
+    const input = document.querySelector('input[type="file"]');
+    if (input instanceof HTMLInputElement && input.files) {
+      const files = input.files;
+      if (files.length < 5) {
+        return { fileCount: true };
+      }
+    }
+    return null;
   }
 }

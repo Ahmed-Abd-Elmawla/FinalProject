@@ -12,6 +12,16 @@ export class PostsService {
     return this.http.get('http://localhost:8000/api/posts');
   }
 
+  //Get posts by user_id
+  getPostsByUserId(id: any) {
+    return this.http.get(`http://localhost:8000/api/posts/user/${id}`);
+  }
+
+  //Get posts by category_id
+  getPostsByCategoryId(id: any) {
+    return this.http.get(`http://localhost:8000/api/posts/category/${id}`);
+  }
+
   //Create New Post
   createPost(data: any) {
     return this.http.post('http://localhost:8000/api/posts', data);
