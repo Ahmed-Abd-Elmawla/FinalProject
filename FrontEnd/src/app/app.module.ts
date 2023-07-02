@@ -1,13 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
-
 import { IncludeModule } from './include/include.module';
-
-
 import { CommentsComponent } from './comments/comments.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,7 +18,7 @@ import { AdminPostsComponent } from './admin-posts/admin-posts.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
-import { DashbordComponent } from './dashboard/dashboard.component';
+import { DashbordComponent } from './dashbord/dashbord.component';
 
 @NgModule({
   declarations: [
