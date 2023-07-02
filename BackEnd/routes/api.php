@@ -30,6 +30,7 @@ Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 
 Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);
 
+Route::apiResource('premiums',\App\Http\Controllers\PremiumController::class);
 
 
 
