@@ -23,12 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::post('/rates', [RateController::class, 'store']);
-// Route::get('rates', [RateController::class, 'index']);
-// Route::get('rates/{rate}', [RateController::class, 'show']);
-// Route::post('rates', [RateController::class, 'store']);
-// Route::put('rates/{rate}', [RateController::class, 'update']);
-// Route::delete('rates/{rate}', [RateController::class, 'destroy']);
+// Route::post('/rates', [RateController::class, 'store']);
+Route::get('rates', [RateController::class, 'index']);
+Route::get('rates/{rate}', [RateController::class, 'show']);
+Route::post('rates', [RateController::class, 'store']);
+Route::put('rates/{rate}', [RateController::class, 'update']);
+Route::delete('rates/{rate}', [RateController::class, 'destroy']);
 
-
-// Route::get('/users/{userId}/average-rate', [RateController::class, 'showAverageRate']);

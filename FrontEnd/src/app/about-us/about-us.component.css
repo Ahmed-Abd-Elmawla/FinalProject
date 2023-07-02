@@ -4,8 +4,8 @@
   background-color: #ECECEC;
  }
 h1{
-
-  font-family: 'Great Vibes', cursive;
+/*
+  font-family: 'Great Vibes', cursive; */
   font-weight: 700;
   line-height: 1.2;
   color: #0E2E50;
@@ -15,7 +15,7 @@ p{
   font-weight: 400;
   line-height: 1.5;
   color: #666565;
-  font-family: 'Great Vibes', cursive;
+  /* font-family: 'Great Vibes', cursive; */
 }
 
 
