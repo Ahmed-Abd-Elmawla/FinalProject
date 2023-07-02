@@ -1,0 +1,85 @@
+<div class="container my-5 bg-light p-4">
+    <form method="post" class=" form-group" [formGroup]="Register" (ngSubmit)="registerUser()">
+        <h3 class=" text-center"><i class="fas fa-user"></i> Register </h3>
+
+        <div class="row mb-3 ">
+          <label  class="col-sm-2 col-form-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="name">
+            <span *ngIf="Register.controls['name'].touched && Register.controls['name'].invalid">
+                
+              <span *ngIf="Register.controls['name'].errors?.['required']" class="text-danger">
+                      this filed is required
+              </span>
+              <span *ngIf="Register.controls['name'].errors?.['minlength']" class="text-danger">
+                  minLength is 5 
+               </span>
+            
+          </span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label  class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" formControlName="email">
+
+            <span *ngIf="Register.controls['email'].touched && Register.controls['email'].invalid">
+                
+              <span *ngIf="Register.controls['email'].errors?.['required']" class="text-danger">
+                      this filed is required
+              </span>
+              <span *ngIf="Register.controls['email'].errors?.['pattern']" class="text-danger">
+                 this not valid Email
+               </span>
+            
+          </span>
+
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label  class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" formControlName="password" >
+
+            <span *ngIf="Register.controls['password'].touched && Register.controls['password'].invalid">
+                
+              <span *ngIf="Register.controls['password'].errors?.['required']" class="text-danger">
+                      this filed is required
+              </span>
+              <span *ngIf="Register.controls['password'].errors?.['minlength']" class="text-danger">
+                 minLength is 8 chars
+               </span>
+            
+           </span>
+
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label  class="col-sm-2 col-form-label">Confirm Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" formControlName="confirmpassword">
+            
+            <span *ngIf="Register.controls['confirmpassword'].touched && Register.controls['confirmpassword'].invalid">
+                
+              <span *ngIf="Register.controls['confirmpassword'].errors?.['required']" class="text-danger">
+                      this filed is required
+              </span>
+             
+            
+           </span>
+
+           <span *ngIf="Register.controls['confirmpassword'].touched ">
+                
+            
+            <span *ngIf="Register.controls['confirmpassword'].value != Register.controls['password'].value" class="text-danger">
+              passwords not the same ...
+             </span>
+          
+         </span>
+
+          </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="Register.invalid">Register</button>
+      </form>
+</div>
