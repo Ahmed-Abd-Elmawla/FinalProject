@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\API\RateController;
@@ -22,11 +23,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::post('register',[UserController::class,'register']);
+Route::post('login',[UserController::class,'login']);
 
-// Route::post('/rates', [RateController::class, 'store']);
-Route::get('rates', [RateController::class, 'index']);
-Route::get('rates/{rate}', [RateController::class, 'show']);
-Route::post('rates', [RateController::class, 'store']);
-Route::put('rates/{rate}', [RateController::class, 'update']);
-Route::delete('rates/{rate}', [RateController::class, 'destroy']);
+Route::get('comments', [CommentController::class, 'index']);
+Route::post('comments', [CommentController::class, 'store']);
+Route::get('comments/{comment}', [CommentController::class, 'show']);
+Route::put('comments/{comment}', [CommentController::class, 'update']);
+Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 
+//Posts Api's-----------------------------------------------------------------------------------------------------
+Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);
+Route::get('/posts/user/{user_id}', [\App\Http\Controllers\API\PostController::class, 'getByUserId']);
+Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostController::class, 'getByCategoryId']);
+
+//Categories Api's-----------------------------------------------------------------------------------------------------
+Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::class);

@@ -1,23 +1,29 @@
 <?php
 
+use App\Http\Controllers\userController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\API\RateController;
 use Illuminate\Support\Facades\File;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
-    return view('welcome');
-});
+
+    return view('home');
+})->middleware(['check','verified']);
+
+
+Auth::routes([
+    'verify'=>true
+]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/user',[userController::class,'index'])->name('user');
+ 
+
+//     return view('welcome');
+// });
 
 Route::get('/post_images/{filename}', function ($filename) {
     $path = storage_path('../public/post_images/' . $filename);
@@ -26,3 +32,4 @@ Route::get('/post_images/{filename}', function ($filename) {
     }
     return response()->file($path);
 });
+
