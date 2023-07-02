@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
 
   user :any;
- 
+  logoUrl: string = 'assets/images/logo.png';
 
 ngOnInit(){
   this.user = JSON.parse(localStorage.getItem('user')||'{}') ;

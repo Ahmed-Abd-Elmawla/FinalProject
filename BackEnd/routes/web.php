@@ -21,8 +21,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/user',[userController::class,'index'])->name('user');
  
 
-    return view('welcome');
-});
+//     return view('welcome');
+// });
 
 Route::get('/post_images/{filename}', function ($filename) {
     $path = storage_path('../public/post_images/' . $filename);
