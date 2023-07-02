@@ -3,6 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UserModule } from './user/user.module';
+import { HomeComponent } from './home/home.component';
+import { IncludeModule } from './include/include.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { CommentsComponent } from './comments/comments.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +27,7 @@ import { DashbordComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     CommentsComponent,
     NavbarComponent,
     HomeComponent,
@@ -35,8 +41,13 @@ import { DashbordComponent } from './dashboard/dashboard.component';
     AdminCategoriesComponent,
     DashbordComponent
   ],
+
   imports: [
     BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    UserModule,
+    IncludeModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
