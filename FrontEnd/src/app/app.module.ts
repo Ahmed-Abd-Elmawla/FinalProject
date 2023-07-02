@@ -18,6 +18,11 @@ import { Home2detailsComponent } from './home2details/home2details.component';
 import { Home2cardComponent } from './home2card/home2card.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { NgbAccordionModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminPostsComponent } from './admin-posts/admin-posts.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
+import { DashbordComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,12 @@ import { NgbAccordionModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap
     Home2Component,
     Home2detailsComponent,
     Home2cardComponent,
-    UserprofileComponent
+    UserprofileComponent,
+    AdminPostsComponent,
+    SideBarComponent,
+    AdminUsersComponent,
+    AdminCategoriesComponent,
+    DashbordComponent
   ],
 
   imports: [
