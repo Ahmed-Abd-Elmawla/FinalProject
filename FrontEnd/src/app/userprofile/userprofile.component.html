@@ -1,0 +1,216 @@
+<div class="body">
+<section class="container">
+  <div class="row mt-4">
+    <div class="col-3 bg-dark pt-5 pb-5">
+      <i class="edit fa-solid fa-user-pen text-light" placement="bottom" ngbTooltip="Edit profile info" (click)="open(content)"></i>
+      <img class="rounded-circle mb-4" src="https://img.freepik.com/premium-vector/brunette-man-avatar-portrait-young-guy-vector-illustration-face_217290-1035.jpg?w=2000" alt="" srcset="">
+      <label class="text-light username">user name</label>
+      <p class="text-center">user@example.com</p>
+    </div>
+    <div class="col-9">
+      <div class="row mb-3 ">
+        <div class="col-6">
+          <h3>Your Posts</h3>
+        </div>
+        <div class="col-6">
+          <a class="btn btn-outline-success float-end" (click)="open(content)">Create new post</a>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngIf="allPosts?.length > 0">
+          <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div *ngFor="let post of allPosts">
+              <div class="col">
+                <div class="card">
+                  <!-- <img src="http://localhost:8000/post_images/{{post.images[0]}}" class="card-img-top" alt="..." height="20%" > -->
+                  <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <h6>Price : {{post.price}} EGP</h6>
+                    <hr>
+                    <small class="text-muted d-block">Posted on {{post.created_at| date: 'dd/MM/yyyy' }}</small>
+                    <small class="text-muted">Updated at {{post.updated_at| date: 'dd/MM/yyyy' }}</small>
+                    <div ngbAccordion class="mt-2 mb-3">
+                      <div ngbAccordionItem [collapsed]="true">
+                        <h2 ngbAccordionHeader>
+                          <button ngbAccordionButton>Description</button>
+                        </h2>
+                        <div ngbAccordionCollapse>
+                          <div ngbAccordionBody>
+                            <ng-template>{{post.description}}</ng-template>
+                          </div>
+                        </div>
+                      </div>
+                      <div ngbAccordionItem [collapsed]="true">
+                        <h2 ngbAccordionHeader>
+                          <button ngbAccordionButton>Images</button>
+                        </h2>
+                        <div ngbAccordionCollapse>
+                          <div ngbAccordionBody>
+                            <ng-template>
+                              <div class="d-inline" *ngFor="let img of post.images">
+                                <img src="http://localhost:8000/post_images/{{img}}" alt="" width="20%">
+                              </div>
+                            </ng-template>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <a class="btn btn-outline-primary m-2" (click)="openUpdate(content,post.id,post.title,post.description,post.price,post.discount,post.location)">update</a>
+                      <a class="btn btn-outline-danger m-2" (click)="delete(post.id)">delete</a>
+                    </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<ng-template #content let-modal>
+	<div class="modal-header p-4">
+		<h4 class="modal-title" id="modal-basic-title" *ngIf="flag==true">create new post</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="flag==false">update post</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click');flag=true;"></button>
+	</div>
+	<div class="modal-body">
+		<form enctype="multipart/form-data" class="ps-5 px-5" [formGroup]="form">
+			<div class="mb-3">
+				<label for="title">title</label>
+				<div class="input-group">
+					<input
+						id="title"
+						class="form-control"
+						placeholder="enter title"
+						name="title"
+            [(ngModel)]="title"
+            formControlName="title"
+            />
+				</div>
+        <div class="alert alert-danger p-1 mt-1"
+        *ngIf="form.controls['title'].touched && form.controls['title'].invalid">
+        <span *ngIf="form.controls['title'].errors?.['required']"><i class="fa-solid fa-triangle-exclamation"></i> Title is required</span>
+        <span *ngIf="form.controls['title'].errors?.['minlength']"><i class="fa-solid fa-triangle-exclamation"></i> Title min length is 30</span>
+      </div>
+			</div>
+      <div class="mb-3">
+				<label for="title">description</label>
+				<div class="input-group">
+					<input
+						id="description"
+						class="form-control"
+						placeholder="enter description"
+						name="description"
+            [(ngModel)]="description"
+            formControlName="description"
+					/>
+				</div>
+        <div class="alert alert-danger p-1 mt-1"
+        *ngIf="form.controls['description'].touched && form.controls['description'].invalid">
+        <span *ngIf="form.controls['description'].errors?.['required']"><i class="fa-solid fa-triangle-exclamation"></i> Description is required</span>
+        <span *ngIf="form.controls['description'].errors?.['minlength']"><i class="fa-solid fa-triangle-exclamation"></i> Description min length is 50</span>
+      </div>
+			</div>
+      <div class="mb-3">
+				<label for="title">price</label>
+				<div class="input-group">
+					<input
+						id="price"
+						class="form-control"
+						placeholder="enter price"
+						name="price"
+            [(ngModel)]="price"
+            formControlName="price"
+					/>
+				</div>
+        <div class="alert alert-danger p-1 mt-1"
+        *ngIf="form.controls['price'].touched && form.controls['price'].invalid">
+        <span class="d-block" *ngIf="form.controls['price'].errors?.['required']"><i class="fa-solid fa-triangle-exclamation"></i> Price is required</span>
+        <span class="d-block" *ngIf="form.controls['price'].errors?.['pattern']"><i class="fa-solid fa-triangle-exclamation"></i> Price must be numbers only</span>
+        <span class="d-block" *ngIf="form.controls['price'].errors?.['minlength']"><i class="fa-solid fa-triangle-exclamation"></i> Price min length is 2</span>
+      </div>
+			</div>
+      <div class="mb-3">
+				<label for="title">discount</label>
+				<div class="input-group">
+					<input
+						id="discount"
+						class="form-control"
+						placeholder="enter discount"
+						name="discount"
+            [(ngModel)]="discount"
+            formControlName="discount"
+					/>
+				</div>
+        <div class="alert alert-danger p-1 mt-1"
+        *ngIf="form.controls['discount'].touched && form.controls['discount'].invalid">
+        <span class="d-block" *ngIf="form.controls['discount'].errors?.['pattern']"><i class="fa-solid fa-triangle-exclamation"></i> Discount must be numbers only</span>
+      </div>
+			</div>
+      <div class="mb-3">
+				<label for="title">location</label>
+				<div class="input-group">
+					<input
+						id="location"
+						class="form-control"
+						placeholder="enter location"
+						name="location"
+            [(ngModel)]="location"
+            formControlName="location"
+					/>
+				</div>
+        <div class="alert alert-danger p-1 mt-1"
+        *ngIf="form.controls['location'].touched && form.controls['location'].invalid">
+        <span *ngIf="form.controls['location'].errors?.['required']"><i class="fa-solid fa-triangle-exclamation"></i> Location is required</span>
+      </div>
+			</div>
+      <div class="mb-3">
+				<label for="title">Category</label>
+				<div class="input-group">
+          <select
+          class="form-select"
+          aria-label="Default select example"
+          name="category"
+          [(ngModel)]="category"
+          formControlName="category"
+          >
+            <option value="1">One</option>
+          </select>
+				</div>
+        <div class="alert alert-danger p-1 mt-1"
+        *ngIf="form.controls['category'].touched && form.controls['category'].invalid">
+        <span *ngIf="form.controls['category'].errors?.['required']"><i class="fa-solid fa-triangle-exclamation"></i> category is required</span>
+      </div>
+			</div>
+      <div class="mb-4">
+				<label for="title">Images</label>
+				<div class="input-group">
+					<input
+          type="file"
+						id="images"
+						class="form-control"
+						placeholder="enter title"
+						name="images[]"
+            multiple
+            formControlName="images"
+					/>
+				</div>
+        <div class="alert alert-danger p-1 mt-1"
+        *ngIf="form.controls['images'].touched && form.controls['images'].invalid">
+        <span class="d-block" *ngIf="form.controls['images'].errors?.['required']"><i class="fa-solid fa-triangle-exclamation"></i> Please upload some images</span>
+        <span class="d-block" *ngIf="form.controls['images'].errors?.['fileCount']"><i class="fa-solid fa-triangle-exclamation"></i> Please upload at least 5 images</span>
+      </div>
+			</div>
+      <button type="button" class="btn btn-outline-success float-end p-2 ps-5 px-5 mb-3" [disabled]="form.invalid" (click)="create()" *ngIf="flag==true">Create</button>
+      <button type="button" class="btn btn-outline-success float-end p-2 ps-5 px-5 mb-3" [disabled]="form.invalid" (click)="update()" *ngIf="flag==false">update</button>
+		</form>
+	</div>
+	<!-- <div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="create()">Create</button>
+	</div> -->
+</ng-template>
+

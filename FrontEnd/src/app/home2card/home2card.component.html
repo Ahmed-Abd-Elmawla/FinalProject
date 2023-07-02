@@ -1,0 +1,10 @@
+<div class="card h-100 shadow">
+    <img [src]="oneOfCards.image" class="card-img-top" style="height: 15rem;">
+    <div class="card-body">
+      <h5 class="card-title text-center"  style="font-family: 'Great Vibes', cursive;font-family: 'Lobster', cursive;">{{ oneOfCards.title }}</h5>
+      <div class="d-flex justify-content-center">
+      <a [routerLink]="['/home2card-details', oneOfCards.id]" class="btn btn-outline-primary my-3 ">View More</a>
+    </div>
+  </div>
+  </div>
+  

@@ -3,9 +3,11 @@
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
 
 
 Route::get('/', function () {
+
     return view('home');
 })->middleware(['check','verified']);
 
@@ -18,3 +20,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/user',[userController::class,'index'])->name('user');
  
+
+    return view('welcome');
+});
+
+Route::get('/post_images/{filename}', function ($filename) {
+    $path = storage_path('../public/post_images/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
+    return response()->file($path);
+});
+
