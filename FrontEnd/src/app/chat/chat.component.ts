@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Pusher from 'pusher-js';
 import { ChatService } from '../services/chat.service';
 
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -38,5 +39,6 @@ export class ChatComponent implements OnInit {
       this.message = '';
     });
   }
-}
 
+
+}
