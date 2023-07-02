@@ -7,7 +7,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-              
+
               <li class="nav-item">
                 <a class="nav-link" routerLink="Dashboard">About</a>
               </li>
@@ -16,8 +16,8 @@
               </li>
             </ul>
             <ul class="navbar-nav ms-auto" *ngIf="user.email ; else  users">
-              
-           
+
+
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" routerLink="Dashboard" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,12 +25,12 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="#">Action</a></li>
-                  
+
                 </ul>
               </li>
-              
+
               <li class="nav-item">
-             
+
                 <button class=" nav-link" (click)="logout()">Logout</button>
               </li>
 
@@ -38,7 +38,7 @@
             <ng-template #users>
 
               <ul class="navbar-nav ms-auto" >
-                
+
                   <li class="nav-item">
                     <a class="nav-link" routerLink="Login">Login</a>
                   </li>
@@ -46,8 +46,8 @@
                     <a class="nav-link" routerLink="Register">Register</a>
                   </li>
 
-                 
-               
+
+
               </ul>
             </ng-template>
           </div>
@@ -93,7 +93,7 @@
           <a class="nav-link">CONTACTS</a>
         </li>
         <li class="nav-item">
-          <a href="/dashboard" class="nav-link">Dashboard</a>
+          <a href="/dash" class="nav-link">Dashboard</a>
         </li>
       </ul>
 
@@ -106,12 +106,12 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Action</a></li>
-            
+
           </ul>
         </li>
-        
+
         <li class="nav-item">
-       
+
           <button class=" nav-link" (click)="logout()">Logout</button>
         </li>
 
@@ -119,7 +119,7 @@
       <ng-template #users>
 
         <ul class="navbar-nav ms-auto" >
-          
+
             <li class="nav-item">
               <a class="nav-link" routerLink="Login">Login</a>
             </li>
@@ -127,8 +127,8 @@
               <a class="nav-link" routerLink="Register">Register</a>
             </li>
 
-           
-         
+
+
         </ul>
       </ng-template>
 
