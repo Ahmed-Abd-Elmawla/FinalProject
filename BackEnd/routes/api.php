@@ -41,3 +41,4 @@ Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostContr
 
 //Categories Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::class);
+

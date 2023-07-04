@@ -23,8 +23,7 @@ class ChatController extends Controller
         return new Response(['success' => true], 200, [
             'Content-Type' => 'multipart/form-data',
         ]);
-    }
-    
+    }   
     
 }
 
