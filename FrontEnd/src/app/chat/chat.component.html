@@ -1,40 +1,45 @@
+
 <div class="container-fluid">
   <div class="row">
-    
-    <div class="col-md-3 m-3 card shadow"  style="background-color: rgba(152, 191, 228, 0.705);">
-      <div class="d-flex flex-column flex-shrink-0 p-3 " style="width: 280px;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-          <div class="dropdown">
-            <a href="#" class="d-flex align-items-center m-2  link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-              choose a user ...
-            </a>
-            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-              <li><a class="dropdown-item" href="#">user 1</a></li>
-              <li><a class="dropdown-item" href="#">user 2</a></li>
-              <li><a class="dropdown-item" href="#">user 3</a></li>
-             
-            </ul>
+    <div class="col-md-3 m-3 card shadow" style="background-color: rgba(152, 191, 228, 0.705);">
+      <h2 class="mt-2 text-primary">Users</h2>
+      <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3 lh-tight">
+        <ng-container *ngFor="let user of users">
+          <div *ngIf="user.id !== currentUserId" (click)="selectUser(user)">
+            <div class="d-flex w-100 align-items-center justify-content-between">
+              <strong class="mb-1">{{ user.name }}</strong>
+              <small class="text-muted">
+                <span *ngIf="user.isOnline" class="badge bg-success">Online</span>
+                <span *ngIf="!user.isOnline" class="badge bg-secondary">Offline</span>
+              </small>
+            </div>
+            <p>{{ user.email }}</p>
             <hr>
           </div>
-        </a>
-      </div>
+        </ng-container>
+      </a>
     </div>
-
-  
+    
     <div class="col-md-8">
       <div class="container card mt-3 shadow" style="background-color: rgba(152, 191, 228, 0.705);">
-        <img [src]="logoUrl" style="height: 5rem; width: 5rem;">
-
-        <div class="d-flex bg-white chat-container">
-          <div class="list-group list-group-flush border-bottom scrollarea" style="min-height: 350px;">
-            <div class="list-group-item rounded-pill d-inline-flex text-wrap text-white bg-primary m-1" *ngFor="let msg of messages" style="display: inline;">
-              <span>{{ msg.message }}</span>
-            </div>
+        <h2 style="color: black;"><img [src]="logoUrl" style="height: 5rem; width: 5rem;"><span class="text-primary" style="font-family: 'Great Vibes', cursive;font-family: 'Lobster', cursive;">{{username}}</span> Chat</h2>
+        <div class=" bg-white chat-container"  #chatContainer>
+          <div class="list-group  border-bottom scrollarea" style="min-height: 350px;">
+           
+            <ng-container *ngFor="let msg of messages">
+                <span >
+                   <span *ngIf="msg.sender_id == authUser?.id" class=" flex list-group-item rounded-pill d-inline-flex text-wrap text-white  m-1 bg-success">{{ msg.message }}</span>
+                  <span *ngIf="msg.receiver_id == authUser?.id" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white  m-1 bg-primary">{{ msg.message }}</span>
+                
+                </span>
+            </ng-container>
+        
           </div>
         </div>
-
+       
         <form (submit)="submit()" class="d-flex chat-input">
-          <input type="text" placeholder="Type a message..." class="form-control m-2" [(ngModel)]="message">
+          <input type="text" placeholder="Type a message..." class="form-control m-2" [(ngModel)]="message" [ngModelOptions]="{ standalone: true }">
+
           <button type="submit" class="btn btn-primary m-2">
             <i class="fas fa-paper-plane"></i>
           </button>
@@ -43,5 +48,3 @@
     </div>
   </div>
 </div>
-
-

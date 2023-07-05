@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Message;
@@ -17,6 +19,7 @@ class ChatController extends Controller
             'receiver_id' => $request->input('receiver_id'),
             'message' => $request->input('message'),
         ]);
+        
 
         event(new NewChatMessage($message));
 
@@ -25,5 +28,15 @@ class ChatController extends Controller
         ]);
     }   
     
+ 
+public function getMessages($senderId, $receiverId)
+{
+    $messages = Message::where('sender_id', $senderId)
+        ->where('receiver_id', $receiverId)
+        ->get();
+
+    return response()->json($messages);
+}
+
 }
 

@@ -31,4 +31,3 @@ Route::get('/post_images/{filename}', function ($filename) {
     }
     return response()->file($path);
 });
-
