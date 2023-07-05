@@ -22,12 +22,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'category_name' => 'required|unique:categories|max:25',
+        $data = $request->validate([
+            "category_name" => 'required|unique:categories|max:25',
+            "cover" => "required|image",
         ]);
 
+        $cover = $request->file('cover');
+        $cover_name = time() . '_' . $cover->getClientOriginalName();
+        $cover->move(public_path('categories_images'), $cover_name);
+        $data['cover'] = $cover_name;
+
         $category = Category::create([
-            'category_name' => $request->category_name,
+            'category_name' => $data['category_name'],
+            'cover' => $data['cover']
         ]);
 
         return response()->json(['message' => 'Category created successfully', 'Category' => $category]);
@@ -46,10 +53,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        // dd($request->all());
         $request->validate([
-            'category_name' => 'required|unique:categories|max:25',
+            'category_name' => 'required|unique:categories,category_name,' . $category->id . '|max:25',
+            "cover" => "nullable|image",
         ]);
-
+        if ($request->has('cover')) {
+            // $old_cover = $category->cover;
+            // $cover_path = public_path('categories_images/' . $old_cover);
+            // if (file_exists($cover_path)) {
+            //     unlink($cover_path);
+            // }
+            $cover = $request->file('cover');
+            $cover_name = time() . '_' . $cover->getClientOriginalName();
+            $cover->move(public_path('categories_images'), $cover_name);
+            $category->update([
+                'cover' => $cover_name,
+            ]);
+        }
         $category->update([
             'category_name' => $request->category_name,
         ]);
@@ -62,6 +83,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $old_cover = $category->cover;
+        $cover_path = public_path('categories_images/' . $old_cover);
+        if (file_exists($cover_path)) {
+            unlink($cover_path);
+        }
         $category->delete();
         return response()->json(['message' => 'category deleted successfully']);
     }
