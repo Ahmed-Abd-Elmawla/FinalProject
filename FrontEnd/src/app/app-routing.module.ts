@@ -13,6 +13,7 @@ import { AdminCategoriesComponent } from './admin-categories/admin-categories.co
 import { DashbordComponent} from './dashbord/dashbord.component';
 import { HomeComponent } from './home/home.component';
 
+
 const routes: Routes = [
   {
     path:'Login',
