@@ -28,8 +28,8 @@
            
             <ng-container *ngFor="let msg of messages">
                 <span >
-                   <span *ngIf="msg.sender_id == authUser?.id" class=" flex list-group-item rounded-pill d-inline-flex text-wrap text-white  m-1 bg-success">{{ msg.message }}</span>
-                  <span *ngIf="msg.receiver_id == authUser?.id" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white  m-1 bg-primary">{{ msg.message }}</span>
+                   <span *ngIf="msg.sender_id == authUser?.id" class=" flex list-group-item rounded-pill d-inline-flex text-wrap text-white  m-1 bg-success blue">{{ msg.message }}</span>
+                  <span *ngIf="msg.receiver_id == authUser?.id" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white  m-1 bg-primary clear">{{ msg.message }}</span>
                 
                 </span>
             </ng-container>
