@@ -34,6 +34,13 @@ Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);
 Route::get('/posts/user/{user_id}', [\App\Http\Controllers\API\PostController::class, 'getByUserId']);
 Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostController::class, 'getByCategoryId']);
+Route::post('/posts/status/{post}', [\App\Http\Controllers\API\PostController::class, 'updateStatus']);
+Route::get('/posts/status/{status}', [\App\Http\Controllers\API\PostController::class, 'getByStatus']);
+
 
 //Categories Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::class);
+
+//Contacts Api's-----------------------------------------------------------------------------------------------------
+Route::apiResource('contacts',\App\Http\Controllers\API\ContactController::class);
+Route::post('mail',[\App\Http\Controllers\API\ContactController::class,'sendEmail']);

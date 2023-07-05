@@ -18,7 +18,7 @@ export class CategoriesService {
   }
   //Update A category By It's Id
   updateCategory(id: any, data: any) {
-    return this.http.put(`http://localhost:8000/api/categories/${id}`, data);
+    return this.http.post(`http://localhost:8000/api/categories/${id}`, data);
   }
 
   //Delete A category

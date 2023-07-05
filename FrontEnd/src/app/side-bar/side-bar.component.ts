@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserData } from '../Model/user-data';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,6 +8,8 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent {
+  //global variables ---------------------------------------------------------------------------------
+  user!:UserData;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal){
 		config.backdrop = 'static';
@@ -14,7 +17,7 @@ export class SideBarComponent {
   }
 
   ngOnInit(){
-
+    this.user = JSON.parse(localStorage.getItem('user') || '[]');
   }
 
   open(content:any) {

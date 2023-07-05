@@ -13,6 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CategoriesService } from '../services/categories.service';
+import { UserData } from '../Model/user-data';
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
@@ -28,12 +29,14 @@ export class UserprofileComponent {
   discount: any = 0;
   location!: any;
   category!: any;
-  user_id: any = 1;
   allPosts!: any;
   flag = true;
   form!: FormGroup;
   categories!:any;
   category_id!: any;
+  stats: [string, string] = ["published", "stopped"];
+user!:UserData;
+
 
   constructor(
     config: NgbModalConfig,
@@ -47,8 +50,9 @@ export class UserprofileComponent {
   }
 
   ngOnInit() {
-    this.post.getAllPosts().subscribe((res: any) => {
-      (this.allPosts = res), console.log(res);
+    this.user = JSON.parse(localStorage.getItem('user') || '[]');
+    this.post.getPostsByUserId(this.user?.id).subscribe((res: any) => {
+      (this.allPosts = res);
     });
 
 
@@ -106,7 +110,8 @@ export class UserprofileComponent {
     p: number,
     dis: number,
     l: any,
-    cat:any
+    cat:any,
+    stat:string
   ) {
     this.flag = false;
     this.post_id = id;
@@ -116,6 +121,7 @@ export class UserprofileComponent {
     this.discount = dis;
     this.location = l;
     this.category_id=cat;
+
     this.modalService.open(content, { size: 'lg', centered: true });
   }
 
@@ -129,7 +135,7 @@ export class UserprofileComponent {
         formData.append('images[]', files[i], files[i].name);
       }
     }
-    formData.set('user_id', this.user_id);
+    formData.set('user_id', String(this.user?.id));
     formData.set('title', this.title);
     formData.set('description', this.description);
     formData.set('price', this.price);
@@ -143,6 +149,39 @@ export class UserprofileComponent {
             position: 'center',
             icon: 'success',
             title: 'Your post has been created.',
+            showConfirmButton: false,
+            timer: 3000,
+          }).then(() => {
+            setTimeout(() => {
+              window.location.reload();
+            }, 0);
+          });
+        }
+      },
+      (err) => {
+        if (err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.error.message,
+          }),
+            console.error(err);
+      }
+    );
+  }
+
+//owner change post state-----------------------------------------------------------------------------
+  onSelected(id: any, value: string){
+    const formData = new FormData();
+    formData.set('_method', 'PUT');
+    formData.set('status', value);
+    this.post.updatePost(id, formData).subscribe(
+      (res) => {
+        {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Status has been updated.',
             showConfirmButton: false,
             timer: 3000,
           }).then(() => {
@@ -180,10 +219,10 @@ export class UserprofileComponent {
     formData.set('price', this.price);
     formData.set('discount', this.discount);
     formData.set('location', this.location);
+    formData.set('category_id', this.category_id);
 
     this.post.updatePost(this.post_id, formData).subscribe(
       (res) => {
-        {
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -195,7 +234,6 @@ export class UserprofileComponent {
               window.location.reload();
             }, 0);
           });
-        }
       },
       (err) => {
         if (err)
