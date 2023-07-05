@@ -74,7 +74,6 @@ export class ChatComponent implements OnInit {
     const previouslySelectedUser = this.selectedUser; 
     this.selectedUser = user;
     localStorage.removeItem('selectedUser');
-    localStorage.removeItem('messages');
     if (this.chatContainer && this.chatContainer.nativeElement) {
       this.chatContainer.nativeElement.scrollIntoView({ behavior: 'smooth' });
       if (this.selectedUser) {
@@ -143,6 +142,7 @@ export class ChatComponent implements OnInit {
       this.chatService.getMessages(senderId, receiverId).subscribe((data: any) => {
         console.log('Received messages:', data);
         this.messages = data;
+        localStorage.setItem('messages', JSON.stringify(this.messages));
       });
     }
   }
