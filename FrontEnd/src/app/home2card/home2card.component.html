@@ -1,10 +1,10 @@
 <div class="card h-100 shadow">
-    <img [src]="oneOfCards.image" class="card-img-top" style="height: 15rem;">
+    <img src="http://localhost:8000/categories_images/{{card.cover}}" class="card-img-top" style="height: 15rem;">
     <div class="card-body">
-      <h5 class="card-title text-center"  style="font-family: 'Great Vibes', cursive;font-family: 'Lobster', cursive;">{{ oneOfCards.title }}</h5>
+      <h5 class="card-title text-center"  style="font-family: 'Great Vibes', cursive;font-family: 'Lobster', cursive;">{{ card.category_name}}</h5>
       <div class="d-flex justify-content-center">
-      <a [routerLink]="['/home2card-details', oneOfCards.id]" class="btn btn-outline-primary my-3 ">View More</a>
+      <a href="/home2card-details/{{card.id}}" class="btn btn-outline-primary my-3 ">View More</a>
     </div>
   </div>
   </div>
-  
+
