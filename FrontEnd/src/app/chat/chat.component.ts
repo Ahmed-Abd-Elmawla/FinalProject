@@ -146,14 +146,15 @@ export class ChatComponent implements OnInit {
       });
     }
   }
+
+  get filteredMessages(): any[] {
+    if (this.selectedUser) {
+      return this.messages.filter(msg =>
+        (msg.sender_id === this.selectedUser.id && msg.receiver_id === this.currentUserId) ||
+        (msg.sender_id === this.currentUserId && msg.receiver_id === this.selectedUser.id)
+      );
+    }
+    return [];
+  }
   
-
 }
-
-
-
-
-
-
-
-
