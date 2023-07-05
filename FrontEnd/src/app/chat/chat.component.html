@@ -5,7 +5,11 @@
       <h2 class="mt-2 text-primary">Users</h2>
       <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3 lh-tight">
         <ng-container *ngFor="let user of users">
-          <div *ngIf="user.id !== currentUserId" (click)="selectUser(user)">
+          <div *ngIf="user.id !== currentUserId"
+          (click)="selectUser(user)"
+          [class.hoverable-item]="true"
+          [class.selected]="user.id === selectedUser?.id"
+          [attr.data-user-id]="user.id">
             <div class="d-flex w-100 align-items-center justify-content-between">
               <strong class="mb-1">{{ user.name }}</strong>
               <small class="text-muted">
@@ -14,10 +18,12 @@
               </small>
             </div>
             <p>{{ user.email }}</p>
-            <hr>
           </div>
+          <hr>
         </ng-container>
       </a>
+      
+      
     </div>
     
     <div class="col-md-8">

@@ -27,8 +27,8 @@ Route::get('/user', function (Request $request) {
 //Users Api's-----------------------------------------------------------------------------------------------------
 Route::post('register',[UserController::class,'register']);
 Route::post('login',[UserController::class,'login']);
-Route::get('users', [UserController::class, 'index']);
-Route::get('users/{id}', [UserController::class, 'show']);
+Route::get('users', [UserController::class, 'getAllUsers']);
+Route::get('users/{id}', [UserController::class, 'getUserById']);
 
 //Comments Api's-----------------------------------------------------------------------------------------------------
 Route::get('comments', [CommentController::class, 'index']);

@@ -13,6 +13,7 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { DashbordComponent} from './dashbord/dashbord.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent} from './about/about.component';
 
 const routes: Routes = [
   {
@@ -55,13 +56,21 @@ const routes: Routes = [
    component: ChatComponent
 },
 
-  { path: 'home2', component: Home2Component },
+  { path: 'home2',
+   component: Home2Component 
+  },
 
-  { path: 'home2card-details/:id', component: Home2detailsComponent },
+  { path: 'home2card-details/:id',
+   component: Home2detailsComponent 
+  },
 
   {
     path: 'userPosts',
     component: UserprofileComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
   },
 ];
 

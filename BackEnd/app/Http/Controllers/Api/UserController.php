@@ -17,7 +17,6 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        // return response()->json($request->name);
 
             $validator = Validator::make($request->all(), [
               'name' => 'required|string|max:255',
@@ -40,7 +39,7 @@ class UserController extends Controller
             $user->save();
           
 event(new UserStatusChanged($user->id, $user->last_seen_at, true));
-            // return response()->json(['message' => 'Registration successful'], 200);
+            
             return response(auth()->user());
           
     }
@@ -55,7 +54,7 @@ event(new UserStatusChanged($user->id, $user->last_seen_at, true));
               $user = Auth::user();
               $user->last_seen_at = now();
               $user->save();
-                // return response()->json(['message' => 'Login succesfully']);
+               
                return response()->json(auth()->user());
         
             } else {
@@ -73,14 +72,14 @@ event(new UserStatusChanged($user->id, $user->last_seen_at, true));
         //
     }
 
-    public function index()
+    public function getAllUsers()
     {
         $users = User::all();
 
         return response()->json($users);
     }
 
-    public function show($id)
+    public function getUserById($id)
     {
         $user = User::find($id);
 

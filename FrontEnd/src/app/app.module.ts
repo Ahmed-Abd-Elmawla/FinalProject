@@ -20,6 +20,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DashbordComponent } from './dashbord/dashbord.component';
     SideBarComponent,
     AdminUsersComponent,
     AdminCategoriesComponent,
-    DashbordComponent
+    DashbordComponent,
+    AboutComponent
   ],
 
   imports: [
