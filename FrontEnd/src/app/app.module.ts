@@ -19,6 +19,16 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { PropertyListComponent } from './property-list/property-list.component';
+import { PropertyComponent } from './property/property.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
+// import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
+// import { NgxGalleryAnimation } from 'ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -35,7 +45,12 @@ import { DashbordComponent } from './dashbord/dashbord.component';
     SideBarComponent,
     AdminUsersComponent,
     AdminCategoriesComponent,
-    DashbordComponent
+    DashbordComponent,
+    PropertyListComponent,
+    PropertyComponent,
+    PostDetailsComponent,
+    CarouselComponent,
+
   ],
 
   imports: [
@@ -49,7 +64,13 @@ import { DashbordComponent } from './dashbord/dashbord.component';
     FormsModule,
     NgbAccordionModule,
     NgbTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbCarouselModule,
+    NgxPaginationModule,
+    CarouselModule,
+    
+  
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import {Card} from '../../app/Model/card'
-
+import {PostsService } from '../services/posts.service'
 
 @Component({
   selector: 'app-home2',
@@ -19,5 +19,21 @@ export class Home2Component {
     { id: 7, title: 'Building', description: 'This is the description for Card 7.', image: 'assets/images/building.jpg' },
     { id: 8, title: 'TwonHouse', description: 'This is the description for Card 8.', image: 'assets/images/twonhouse.jpg' }
   ];
+
+
+  properties!: any[];
+
+  constructor(private postService: PostsService) { }
+
+  ngOnInit() {
+    this.getPostsByCategory('category_name');
+  }
+
+  getPostsByCategory(categoryName: string) {
+    this.postService.getPostsByCategory(categoryName)
+      .subscribe((data: any) => {
+        this.properties = data;
+      });
+  }
 }
 

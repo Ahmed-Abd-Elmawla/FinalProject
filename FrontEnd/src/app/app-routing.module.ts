@@ -12,6 +12,7 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { DashbordComponent} from './dashbord/dashbord.component';
 import { HomeComponent } from './home/home.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
     path: 'userPosts',
     component: UserprofileComponent,
   },
+  {
+    path:'post-details/:id',
+    component: PostDetailsComponent ,
+  }
 ];
 
 @NgModule({

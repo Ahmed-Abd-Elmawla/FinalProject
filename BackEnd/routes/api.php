@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use  \App\Http\Controllers\API\NewRateController;
 use App\Http\Controllers\CommentController;
 
 /*
@@ -37,3 +38,7 @@ Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostContr
 
 //Categories Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::class);
+
+//Rate
+ Route::apiResource('rate', NewRateController::class);
+// Route::get('/rate',[\App\Http\Controllers\API\NewRateController::class,'index']);
