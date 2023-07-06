@@ -158,7 +158,7 @@ class PostController extends Controller
      */
     public function getByCategoryId($category_id)
     {
-        $posts = Post::where('category_id', $category_id)->get();
+        $posts = Post::where(['category_id'=> $category_id,'status'=>'published'])->get();
         return response()->json($posts);
     }
 
