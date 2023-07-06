@@ -33,8 +33,8 @@
           <div class="list-group border-bottom scrollarea" style="min-height: 350px;">
             <ng-container *ngFor="let msg of filteredMessages">
               <span>
-                <span *ngIf="msg.sender_id === (selectedUser?.id || null)" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white m-1 bg-primary blue">{{ msg.message }}</span>
-                <span *ngIf="msg.receiver_id === (selectedUser?.id || null)" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white m-1 bg-success clear">{{ msg.message }}</span>
+                <span *ngIf="msg.sender_id === (selectedUser?.id || null)" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white m-1 bg-success clear">{{ msg.message }}</span>
+                <span *ngIf="msg.receiver_id === (selectedUser?.id || null)" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white m-1 bg-primary blue">{{ msg.message }}</span>
               </span>
             </ng-container>
           </div>
