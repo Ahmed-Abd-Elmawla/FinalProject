@@ -27,10 +27,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rate');
-        $table->dropForeign(['owner_id']);
-        $table->dropColumn('owner_id');
-        $table->dropForeign(['user_id']);
-        $table->dropColumn('user_id');
+        Schema::dropIfExists('rate' , function(Blueprint $table){
+
+            $table->dropForeign(['owner_id']);
+            $table->dropColumn('owner_id');
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
+    
     }
 };
