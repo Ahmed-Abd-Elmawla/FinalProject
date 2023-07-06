@@ -16,7 +16,7 @@ export class Home2detailsComponent implements OnInit {
 
  propertyItem !: Property;
   activatedRoute: any;
- 
+
 
   constructor(private route: ActivatedRoute,private req: PostsService,private http: HttpClient,private PostsService :PostsService) {}
 
@@ -26,12 +26,7 @@ export class Home2detailsComponent implements OnInit {
       // const cardTitle = params['title']; // Get the 'name' parameter from the route
        this.card = this.cards.find(card => card.id === cardId);
 
-       this.req
-       .getPostsByCategoryId(this.activatedRoute.snapshot.params['id'])
-       .subscribe((res: any) => {
-         console.log(res);
-         this.propertyItem  = res;
-       });
+   
   });
 
 
