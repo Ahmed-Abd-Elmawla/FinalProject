@@ -32,6 +32,7 @@ Route::post('login',[UserController::class,'login']);
 Route::get('users', [UserController::class, 'getAllUsers']);
 Route::get('users/{id}', [UserController::class, 'getUserById']);
 
+
 //Comments Api's-----------------------------------------------------------------------------------------------------
 Route::get('comments', [CommentController::class, 'index']);
 Route::post('comments', [CommentController::class, 'store']);
@@ -41,15 +42,15 @@ Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 
 //Posts Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);
-
-
-Route::apiResource('premiums',\App\Http\Controllers\PremiumController::class);
-
-
 Route::get('/posts/user/{user_id}', [\App\Http\Controllers\API\PostController::class, 'getByUserId']);
 Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostController::class, 'getByCategoryId']);
 Route::post('/posts/status/{post}', [\App\Http\Controllers\API\PostController::class, 'updateStatus']);
 Route::get('/posts/status/{status}', [\App\Http\Controllers\API\PostController::class, 'getByStatus']);
+
+
+
+Route::apiResource('premiums',\App\Http\Controllers\PremiumController::class);
+
 
 //Categories Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::class);
@@ -59,11 +60,11 @@ Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::cl
  Route::apiResource('rate', NewRateController::class);
 // Route::get('/rate',[\App\Http\Controllers\API\NewRateController::class,'index']);
 
-//Chat Api's-----------------------------------------------------------------------------------------------------
+//Chat Api's-----------------------------------------------------------------------------------------------------------
 Route::post('messages', [ChatController::class, 'sendMessage']);
 Route::get('messages/{senderId}/{receiverId}', [ChatController::class, 'getMessages']);
 
-//Contacts Api's-----------------------------------------------------------------------------------------------------
+//Contacts Api's-------------------------------------------------------------------------------------------------------
 Route::apiResource('contacts',\App\Http\Controllers\API\ContactController::class);
 Route::post('mail',[\App\Http\Controllers\API\ContactController::class,'sendEmail']);
 

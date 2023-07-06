@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 use function PHPUnit\Framework\returnSelf;
@@ -18,8 +19,13 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
+        $url='';
+
             $validator = Validator::make($request->all(), [
               'name' => 'required|string|max:255',
+              'number' => 'required',
+              'id' => 'required',
+              'image' => 'required',
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required'
             ]);
@@ -27,11 +33,23 @@ class UserController extends Controller
             if ($validator->fails()) {
               return response()->json(['errors' => $validator->errors()], 422);
             }
+
+            if($request->hasFile('image')){
+
+              $file=$request->file('image');
+              $filename=time().$file->getClientOriginalName().'.'. $file->getClientOriginalExtension();
+              $path=$file->storeAs('public/images',$filename);
+                $url=Storage::url($path);
+
+            }
             $user = User::create([
               'name' => $request->name,
+              'number'=>$request->number,
+              'personal_id'=>$request->id,
+              'image'=>$url,
               'email' => $request->email,
               'password' => Hash::make($request->password),
-              'role_id'=>1
+              'role_id'=>3
             ]);
           
             Auth::login($user);

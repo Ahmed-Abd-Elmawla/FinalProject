@@ -19,6 +19,7 @@ import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
 
+
 const routes: Routes = [
   {
     path:'Login',
