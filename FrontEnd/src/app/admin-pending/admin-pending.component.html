@@ -1,0 +1,46 @@
+<div class="body">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <app-side-bar></app-side-bar>
+      </div>
+      <div class="col-9">
+        <div class="row mb-3">
+          <div class="col p-0 ps-1">
+            <h3>Posts</h3>
+          </div>
+        </div>
+        <div class="row p-0 ps-1">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">location</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="allPosts?.length ==0" class="text-center">
+                <td colspan="5">No Pending Posts</td></tr>
+              <tr *ngFor="let post of allPosts; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.price}}</td>
+                <td>{{post.location}}</td>
+                <td>
+                  <button class="btn btn-info" placement="bottom" ngbTooltip="view post" (click)="delete(post.id)"><i class="fa-solid fa-eye"></i></button>
+                  <button class="btn btn-success ms-2" placement="bottom" ngbTooltip="publish post" (click)="update(post.id,'published')"><i class="fa-solid fa-thumbs-up"></i></button>
+                  <button class="btn btn-danger ms-2" placement="bottom" ngbTooltip="reject post" (click)="update(post.id,'rejected')"><i class="fa-solid fa-thumbs-down"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

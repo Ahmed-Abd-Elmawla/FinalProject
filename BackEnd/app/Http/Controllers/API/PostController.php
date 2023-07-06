@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -24,34 +26,36 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            "user_id" =>'required|integer',
-            "title"=>'required|string',
-            "description"=>"required",
-            "price"=>"required|numeric",
-            "discount"=>"nullable|numeric",
-            "location"=>"required|string",
-            "images"=>"required|array|min:5",
-            "images.*"=>"required|image"
+            "user_id" => 'required|integer',
+            "category_id" => 'required|integer',
+            "title" => 'required|string',
+            "description" => "required",
+            "price" => "required|numeric",
+            "discount" => "nullable|numeric",
+            "location" => "required|string",
+            "images" => "required|array|min:5",
+            "images.*" => "required|image"
         ]);
-        $images=[];
-        if($request->has('images')){
+        $images = [];
+        if ($request->has('images')) {
             $images_ = $request->file('images');
-            foreach ($images_ as  $image){
-                $image_name = time().'_'.$image->getClientOriginalName();
-                $image->move(public_path('post_images'),$image_name);
-                $images[]=$image_name;
+            foreach ($images_ as  $image) {
+                $image_name = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('post_images'), $image_name);
+                $images[] = $image_name;
+            }
         }
-    }
-    $new_post = Post::create([
-        'user_id'=>$data["user_id"],
-        'title'=>$data["title"],
-        'description'=>$data["description"],
-        'price'=>$data["price"],
-        'discount'=>$data["discount"]??0,
-        'location'=>$data["location"],
-        'images'=>$images
-    ]);
-        return response()->json(['message' => 'Post created successfully', 'post' => $new_post]);
+            Post::create([
+            'user_id' => $data["user_id"],
+            'category_id' => $data["category_id"],
+            'title' => $data["title"],
+            'description' => $data["description"],
+            'price' => $data["price"],
+            'discount' => $data["discount"] ?? 0,
+            'location' => $data["location"],
+            'images' => $images
+        ]);
+        return response()->json(['message' => 'Post created successfully']);
     }
 
     /**
@@ -68,41 +72,59 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
 
     {
+        if ($post->status === 'pending') {
+            return response()->json(['message' => "Cannot update a pending post."], 403);
+        }
+        if ($request->has('status')) {
+            $request->validate([
+                'status' => ['required', Rule::in(['published', 'stopped'])],
+            ]);
+            $post->update([
+                'status' => $request->status
+            ]);
+            return response()->json(['message' => "Status has been updated."]);
+        }
         $data = $request->validate([
-            "title"=>'required|string',
-            "description"=>"required",
-            "price"=>"required|numeric",
-            "discount"=>"nullable|numeric",
-            "location"=>"required|string",
-            "images"=>"nullable|array",
-            "images.*"=>"nullable|image"
+            "category_id" => 'required|integer',
+            "title" => 'required|string',
+            "description" => "required",
+            "price" => "required|numeric",
+            "discount" => "nullable|numeric",
+            "location" => "required|string",
+            "images" => ["nullable", "array", "min:5"],
+            "images.*" => "nullable",
         ]);
-        $post->update([
-            'title'=>$data["title"],
-            'description'=>$data["description"],
-            'price'=>$data["price"],
-            'discount'=>$data["discount"]??0,
-            'location'=>$data["location"]
-        ]);
-        $images=[];
-        if($request->has('images')){
+
+            $post->update([
+                'category_id' => $data["category_id"],
+                'title' => $data["title"],
+                'description' => $data["description"],
+                'price' => $data["price"],
+                'discount' => $data["discount"] ?? 0,
+                'location' => $data["location"],
+                'status'=>'pending'
+            ]);
+
+        $images = [];
+        if ($request->has('images')) {
             foreach ($post->images as $img) {
-                $imagePath = public_path('post_images/'.$img);
+                $imagePath = public_path('post_images/' . $img);
                 if (file_exists($imagePath)) {
                     unlink($imagePath);
                 }
             }
-            $images_ = $request->input('images');
-            foreach ($images_ as  $image){
-                $image_name = time().'_'.$image->getClientOriginalName();
-                $image->move(public_path('post_images'),$image_name);
-                $images[]=$image_name;
+            $images_ = $request->file('images');
+            foreach ($images_ as  $image) {
+                $image_name = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('post_images'), $image_name);
+                $images[] = $image_name;
+            }
+            $post->update([
+                'images' => $images,
+                'status'=>'pending'
+            ]);
+            return response()->json(['message' => 'Post updated successfully', 'post' => $post]);
         }
-        $post->update([
-            'images'=>$images
-        ]);
-    }
-        return response()->json(['message' => 'Post updated successfully', 'post' => $post]);
     }
 
     /**
@@ -112,7 +134,7 @@ class PostController extends Controller
     {
         if (!empty($post->images)) {
             foreach ($post->images as $image) {
-                $imagePath = public_path('post_images/'.$image);
+                $imagePath = public_path('post_images/' . $image);
                 if (file_exists($imagePath)) {
                     unlink($imagePath);
                 }
@@ -120,5 +142,43 @@ class PostController extends Controller
         }
         $post->delete();
         return response()->json(['message' => 'Post deleted successfully']);
+    }
+
+    /**
+     * Get posts by user_id.
+     */
+    public function getByUserId($user_id)
+    {
+        $posts = Post::where('user_id', $user_id)->get();
+        return response()->json($posts);
+    }
+
+    /**
+     * Get posts by category_id.
+     */
+    public function getByCategoryId($category_id)
+    {
+        $posts = Post::where('category_id', $category_id)->get();
+        return response()->json($posts);
+    }
+
+    /**
+     * Update post status only.
+     */
+    public function updateStatus(Request $request, Post $post)
+    {
+        $post->update([
+            'status' => $request->status
+        ]);
+        return response()->json(['message' => "Post status updated."]);
+    }
+
+    /**
+     * Get posts by category_id.
+     */
+    public function getByStatus($status)
+    {
+        $posts = Post::where('status', $status)->get();
+        return response()->json($posts);
     }
 }
