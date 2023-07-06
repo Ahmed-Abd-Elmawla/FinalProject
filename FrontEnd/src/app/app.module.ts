@@ -26,9 +26,6 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-// import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
-// import { NgxGalleryAnimation } from 'ngx-gallery';
 import { AboutComponent } from './about/about.component';
 import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
@@ -75,7 +72,6 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
     ReactiveFormsModule,
     NgbCarouselModule,
     NgxPaginationModule,
-    CarouselModule,
     NgbDropdownModule,
   ],
   providers: [AdminGuard],
