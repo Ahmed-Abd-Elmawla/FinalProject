@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Event;
 
@@ -39,6 +40,11 @@ Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 
 //Posts Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);
+
+
+Route::apiResource('premiums',\App\Http\Controllers\PremiumController::class);
+
+
 Route::get('/posts/user/{user_id}', [\App\Http\Controllers\API\PostController::class, 'getByUserId']);
 Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostController::class, 'getByCategoryId']);
 Route::post('/posts/status/{post}', [\App\Http\Controllers\API\PostController::class, 'updateStatus']);
@@ -54,4 +60,5 @@ Route::get('messages/{senderId}/{receiverId}', [ChatController::class, 'getMessa
 //Contacts Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('contacts',\App\Http\Controllers\API\ContactController::class);
 Route::post('mail',[\App\Http\Controllers\API\ContactController::class,'sendEmail']);
+
 

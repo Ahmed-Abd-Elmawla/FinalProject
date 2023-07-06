@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PremiumPost extends Model
+class Premium extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['post_id', 'expire_date'];
+    protected $table = "premiums";
+    protected $fillable = [
+        'post_id',
+        'expire_date'
+    ];
 
     public function post()
     {
