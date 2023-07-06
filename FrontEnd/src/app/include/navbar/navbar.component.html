@@ -71,7 +71,7 @@
           <a class="nav-link active" aria-current="page" routerLink=""  >HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">ABOUT</a>
+          <a class="nav-link" routerLink="about">ABOUT</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">PROPERTY</a>
@@ -106,9 +106,11 @@
           <a class="nav-link" routerLink="Dashboard" role="button">
             {{user.name}}
           </a>
-          <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Action</a></li>
-          </ul> -->
+           <a routerLink="chat"><i class="fas fa-comment text-primary dropdown-item">  c h at </i></a> 
+          </ul>
+          </ul>
         </li>
         <li class="nav-item">
           <button class=" nav-link" (click)="logout()">Logout</button>

@@ -1,0 +1,29 @@
+
+.blue {
+   float: left;
+   clear: both;
+  }
+  
+  .clear {
+    float: right;
+    clear: both;
+  }
+  .flex{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .hoverable-item:hover {
+    background-color: #2da3da;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+ 
+  .hoverable-item.selected {
+    background-color: #7c5af5dc;
+    border-radius: 5px;
+    padding: 2px;
+    box-sizing: border-box;
+  }

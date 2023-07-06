@@ -6,12 +6,14 @@ import { AuthGuard } from './route_guard';
 import {CommentsComponent} from './comments/comments.component';
 import {Home2Component} from './home2/home2.component';
 import {Home2detailsComponent} from './home2details/home2details.component';
+import {ChatComponent} from './chat/chat.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AdminPostsComponent } from './admin-posts/admin-posts.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { DashbordComponent} from './dashbord/dashbord.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent} from './about/about.component';
 import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
@@ -66,15 +68,26 @@ const routes: Routes = [
     path: 'comments',
     component: CommentsComponent,
   },
+  { path: 'chat',
+   component: ChatComponent
+},
 
-  { path: 'home2', component: Home2Component },
+  { path: 'home2',
+   component: Home2Component 
+  },
 
-  { path: 'home2card-details/:id', component: Home2detailsComponent },
+  { path: 'home2card-details/:id',
+   component: Home2detailsComponent 
+  },
 
   {
     path: 'userPosts',
     component: UserprofileComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
   },
 ];
 

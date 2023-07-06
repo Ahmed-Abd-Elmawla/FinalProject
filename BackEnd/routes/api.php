@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ChatController;
+use Illuminate\Support\Facades\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +18,19 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
 
+//Users Api's-----------------------------------------------------------------------------------------------------
 Route::post('register',[UserController::class,'register']);
 Route::post('login',[UserController::class,'login']);
+Route::get('users', [UserController::class, 'getAllUsers']);
+Route::get('users/{id}', [UserController::class, 'getUserById']);
 
+//Comments Api's-----------------------------------------------------------------------------------------------------
 Route::get('comments', [CommentController::class, 'index']);
 Route::post('comments', [CommentController::class, 'store']);
 Route::get('comments/{comment}', [CommentController::class, 'show']);
@@ -37,10 +44,14 @@ Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostContr
 Route::post('/posts/status/{post}', [\App\Http\Controllers\API\PostController::class, 'updateStatus']);
 Route::get('/posts/status/{status}', [\App\Http\Controllers\API\PostController::class, 'getByStatus']);
 
-
 //Categories Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::class);
+
+//Chat Api's-----------------------------------------------------------------------------------------------------
+Route::post('messages', [ChatController::class, 'sendMessage']);
+Route::get('messages/{senderId}/{receiverId}', [ChatController::class, 'getMessages']);
 
 //Contacts Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('contacts',\App\Http\Controllers\API\ContactController::class);
 Route::post('mail',[\App\Http\Controllers\API\ContactController::class,'sendEmail']);
+

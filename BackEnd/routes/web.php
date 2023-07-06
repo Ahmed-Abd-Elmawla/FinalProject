@@ -33,6 +33,8 @@ Route::get('/post_images/{filename}', function ($filename) {
     return response()->file($path);
 });
 
+
+
 //route to get categories images
 Route::get('/categories_images/{filename}', function ($filename) {
     $path = storage_path('../public/categories_images/' . $filename);
