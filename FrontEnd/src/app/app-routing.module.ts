@@ -14,6 +14,9 @@ import { AdminCategoriesComponent } from './admin-categories/admin-categories.co
 import { DashbordComponent} from './dashbord/dashbord.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent} from './about/about.component';
+import { AdminPendingComponent } from './admin-pending/admin-pending.component';
+import { AdminGuard } from './Guards/admin.guard';
+import { AdminContactComponent } from './admin-contact/admin-contact.component';
 
 const routes: Routes = [
   {
@@ -27,26 +30,39 @@ const routes: Routes = [
   },
 
   {
-    path: 'dash',
+    path: 'Dashboard',
     component: DashbordComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'AdminPosts',
     component: AdminPostsComponent,
+    canActivate:[AdminGuard],
+  },
+  {
+    path: 'AdminPending',
+    component: AdminPendingComponent,
+    canActivate:[AdminGuard],
   },
   {
     path: 'AdminUsers',
     component: AdminUsersComponent,
+    canActivate:[AdminGuard],
   },
   {
     path: 'AdminCategories',
     component: AdminCategoriesComponent,
+    canActivate:[AdminGuard],
   },
-
+  {
+    path: 'AdminContacts',
+    component: AdminContactComponent,
+    canActivate:[AdminGuard],
+  },
   {
     path: '',
     component:HomeComponent,
-    canActivate:[AuthGuard] // this for route gaureded -------->>>
+    // canActivate:[AuthGuard] // this for route gaureded -------->>>
   },
   {
     path: 'comments',
@@ -67,6 +83,7 @@ const routes: Routes = [
   {
     path: 'userPosts',
     component: UserprofileComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'about',

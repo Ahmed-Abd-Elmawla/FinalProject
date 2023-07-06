@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {Card} from '../../app/Model/card'
+import { CategoriesService } from '../services/categories.service';
 
 
 @Component({
@@ -8,5 +9,5 @@ import {Card} from '../../app/Model/card'
   styleUrls: ['./home2card.component.css']
 })
 export class Home2cardComponent {
-  @Input() oneOfCards!: Card;
+  @Input() card!: any;
 }

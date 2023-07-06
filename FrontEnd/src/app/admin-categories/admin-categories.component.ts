@@ -15,11 +15,13 @@ import { CategoriesService } from '../services/categories.service';
   styleUrls: ['./admin-categories.component.css'],
 })
 export class AdminCategoriesComponent {
+   //global variables ---------------------------------------------------------------------------------
   flag = true;
   form!: FormGroup;
   categories!:any;
   category_name!: any;
   category_id!: number;
+  cover!:any;
 
   constructor(
     config: NgbModalConfig,
@@ -63,9 +65,15 @@ export class AdminCategoriesComponent {
   }
   //create new category-----------------------------------------------------------------------------------
   create() {
-const data={
-  "category_name":this.category_name
-}
+    const data = new FormData();
+    const input = document.querySelector('input[type="file"]');
+    if (input instanceof HTMLInputElement && input.files) {
+      const files = input.files;
+      if(files.length>0){
+        data.append('cover', files[0], files[0].name);
+    }}
+    data.set("category_name",this.category_name);
+
     this.req.createCategory(data).subscribe(
       (res) => {
         {
@@ -96,9 +104,15 @@ const data={
 
   //update category---------------------------------------------------------------------------------------
   update() {
-    const data={
-      "category_name":this.category_name
-    }
+    const data = new FormData();
+    const input = document.querySelector('input[type="file"]');
+    if (input instanceof HTMLInputElement && input.files) {
+      const files = input.files;
+      if(files.length>0){
+        data.append('cover', files[0], files[0].name);
+    }}
+    data.set("_method",'PUT');
+    data.set("category_name",this.category_name);
         this.req.updateCategory(this.category_id,data).subscribe(
           (res) => {
             {
