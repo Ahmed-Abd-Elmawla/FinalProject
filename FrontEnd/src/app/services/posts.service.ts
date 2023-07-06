@@ -21,12 +21,13 @@ export class PostsService {
   getPostsByCategoryId(id: any) {
     return this.http.get(`http://localhost:8000/api/posts/category/${id}`);
   }
-  // Get posts by category_name
-  private baseUrl='http://localhost:8000/api/posts';
-  getPostsByCategory(categoryName: string) {
-    return this.http.get(`${this.baseUrl}?category_name=${categoryName}`);
+
+  //Get posts by status
+  getPostsByStatus(stat: any) {
+    return this.http.get(`http://localhost:8000/api/posts/status/${stat}`);
   }
-    //Create New Post
+
+  //Create New Post
   createPost(data: any) {
     return this.http.post('http://localhost:8000/api/posts', data);
   }
@@ -36,11 +37,14 @@ export class PostsService {
     return this.http.get(`http://localhost:8000/api/posts/${id}`);
   }
 
-
-
   //Update A Post By It's Id
   updatePost(id: any, data: any) {
     return this.http.post(`http://localhost:8000/api/posts/${id}`, data);
+  }
+
+  //admin publish or reject pending posts
+  updateStatus(id: any, data: any) {
+    return this.http.post(`http://localhost:8000/api/posts/status/${id}`, data);
   }
 
   //Delete A Post

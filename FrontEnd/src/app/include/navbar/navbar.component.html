@@ -62,77 +62,91 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <img [src]="logoUrl" style="height:5rem ; width:5rem;">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink=""  >HOME</a>
+          <a class="nav-link active" aria-current="page" routerLink="">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">ABOUT</a>
+          <a class="nav-link" routerLink="about">ABOUT</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           PROPERTY
-          </a>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">PROPERTY</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Apartmant</a></li>
             <li><a class="dropdown-item" href="#">Home</a></li>
             <li><a class="dropdown-item" href="#">Office</a></li>
             <li><a class="dropdown-item" href="#">Shop</a></li>
-            <!-- <li><hr class="dropdown-divider"></li> -->
+
             <li><a class="dropdown-item" href="#">Villa</a></li>
             <li><a class="dropdown-item" href="#">Building</a></li>
             <li><a class="dropdown-item" href="#">TownHouse</a></li>
             <li><a class="dropdown-item" href="#">Garage</a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="nav-item">
-          <a class="nav-link">CONTACTS</a>
-        </li>
-        <li class="nav-item">
-          <a href="/dash" class="nav-link">Dashboard</a>
-        </li>
-      </ul>
-
-
-      <ul class="navbar-nav ms-auto" *ngIf="user.email ; else  users">
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" routerLink="Dashboard" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{user.name}}
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-
-          </ul>
-        </li>
-
-        <li class="nav-item">
-
-          <button class=" nav-link" (click)="logout()">Logout</button>
-        </li>
-
-      </ul>
-      <ng-template #users>
-
-        <ul class="navbar-nav ms-auto" >
-
-            <li class="nav-item">
-              <a class="nav-link" routerLink="Login">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="Register">Register</a>
-            </li>
-
-
-
-        </ul>
-      </ng-template>
-
-
+          <div ngbDropdown class="d-inline-block">
+            <button type="button" class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
+              PROPERTY
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li *ngFor="let category of categories"><a class="dropdown-item"
+            href="/home2card-details/{{category.id}}">{{category.category_name}}</a></li>
     </div>
+  </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link">CONTACTS</a>
+  </li>
+  </ul>
+
+
+<ul class="navbar-nav" *ngIf="user.email ; else  users">
+  <li class="nav-item" >
+    <div ngbDropdown class="d-inline-block">
+      <button type="button" class="nav-link text-light" id="dropdownBasic1" ngbDropdownToggle>
+        {{user.name}}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+  <li ><a class="dropdown-item"  routerLink="Dashboard" role="button">Dashboard</a></li>
+  <li ><a class="dropdown-item"  routerLink="chat" role="button">c h at  <i class="fas fa-comment text-primary"></i></a></li>
+</div>
+</div>
+</li>
+<li class="nav-item">
+  <button class="text-light nav-link mx-3" (click)="logout()">Logout</button>
+</li>
+</ul>
+
+  <!-- <ul class="navbar-nav ms-auto" *ngIf="user.email ; else  users">
+    <li class="nav-item dropdown">
+      <a class="nav-link" routerLink="Dashboard" role="button">
+        {{user.name}}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <a routerLink="chat"><i class="fas fa-comment text-primary dropdown-item"> c h at </i></a>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <button class=" nav-link" (click)="logout()">Logout</button>
+    </li>
+  </ul> -->
+    <ng-template #users>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="Login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  mx-3" routerLink="Register">Register</a>
+        </li>
+      </ul>
+    </ng-template>
+
+  </div>
   </div>
 </nav>

@@ -12,8 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { Home2Component } from './home2/home2.component';
 import { Home2detailsComponent } from './home2details/home2details.component';
 import { Home2cardComponent } from './home2card/home2card.component';
+import { ChatComponent } from './chat/chat.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
-import { NgbAccordionModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminPostsComponent } from './admin-posts/admin-posts.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
@@ -25,10 +26,11 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import { AboutComponent } from './about/about.component';
+import { AdminPendingComponent } from './admin-pending/admin-pending.component';
+import { AdminGuard } from './Guards/admin.guard';
+import { AdminContactComponent } from './admin-contact/admin-contact.component';
 
-// import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
-// import { NgxGalleryAnimation } from 'ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     Home2Component,
     Home2detailsComponent,
     Home2cardComponent,
+    ChatComponent,
     UserprofileComponent,
     AdminPostsComponent,
     SideBarComponent,
@@ -50,7 +53,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     PropertyComponent,
     PostDetailsComponent,
     CarouselComponent,
-
+    AboutComponent,
+    AdminPendingComponent,
+    AdminContactComponent,
   ],
 
   imports: [
@@ -67,12 +72,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ReactiveFormsModule,
     NgbCarouselModule,
     NgxPaginationModule,
-    CarouselModule,
-    
-  
-    
+    NgbDropdownModule,
   ],
-  providers: [],
+  providers: [AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

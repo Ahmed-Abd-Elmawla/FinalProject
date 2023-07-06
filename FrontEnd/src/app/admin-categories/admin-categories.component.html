@@ -17,13 +17,15 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Cover</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let category of categories;let i = index">
+              <tr class="align-middle" *ngFor="let category of categories;let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{category.category_name}}</td>
+                <td><img src="http://localhost:8000/categories_images/{{category.cover}}" alt="" srcset=""></td>
                 <td>
                   <a class="btn btn-primary" (click)="openUpdate(content,category.category_name,category.id)" placement="bottom" ngbTooltip="Update Category"><i class="fa-solid fa-pen-to-square"></i></a>
                   <a class="btn btn-danger ms-2" (click)="delete(category.id)" placement="bottom" ngbTooltip="Delete Category"><i class="fa-solid fa-trash-can"></i></a>
@@ -69,6 +71,19 @@
               class="fa-solid fa-triangle-exclamation"></i> Name must be letters only</span>
       </div>
 			</div>
+      <div class="mb-3">
+				<label for="category_name">Category cover</label>
+				<div class="input-group">
+					<input
+          type="file"
+						id="category"
+						class="form-control"
+						placeholder="enter category name"
+						name="cover"
+            [(ngModel)]="cover"
+					/>
+				</div>
+      </div>
 		</form>
 	</div>
 	<div class="modal-footer">
