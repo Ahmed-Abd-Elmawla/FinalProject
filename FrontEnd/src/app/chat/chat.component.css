@@ -1,9 +1,11 @@
-
+.container-fluid{
+  margin-top: 80px;
+}
 .blue {
    float: left;
    clear: both;
   }
-  
+
   .clear {
     float: right;
     clear: both;
@@ -20,7 +22,7 @@
     box-sizing: border-box;
     border-radius: 5px;
   }
- 
+
   .hoverable-item.selected {
     background-color: #7c5af5dc;
     border-radius: 5px;

@@ -43,7 +43,7 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
     AdminUsersComponent,
     AdminCategoriesComponent,
     DashbordComponent,
-    AboutComponent
+    AboutComponent,
     AdminPendingComponent,
     AdminContactComponent,
   ],
