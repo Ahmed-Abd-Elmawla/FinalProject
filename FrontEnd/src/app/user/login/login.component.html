@@ -1,0 +1,42 @@
+<div class="container">
+
+    <form method="post" class="form-group p-4 bg-light my-5" [formGroup]="login" (ngSubmit)="userLogin()">
+         <h3 class=" text-center">Login</h3>
+            <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="inputEmail" formControlName="email">
+
+                  <span *ngIf="login.controls['email'].touched && login.controls['email'].invalid">
+                  
+                        <span *ngIf="login.controls['email'].errors?.['required']" class="text-danger">
+                              this filed is required
+                        </span>
+                        <span *ngIf="login.controls['email'].errors?.['pattern']" class="text-danger">
+                        this not valid Email
+                        </span>
+                  
+                  </span>
+            </div>
+            <div class="mb-3">
+            <label for="inputPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="inputPassword" formControlName="password">
+              <span *ngIf="login.controls['password'].touched && login.controls['password'].invalid">
+                  
+                  <span *ngIf="login.controls['password'].errors?.['required']" class="text-danger">
+                        this filed is required
+                  </span>
+                  <span *ngIf="login.controls['password'].errors?.['minlength']" class="text-danger">
+                                    minlength is 8 chars 
+                  </span>
+            
+            </span>
+            </div>
+
+            <!-- <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div> -->
+
+            <button type="submit" class="btn btn-primary" [disabled]="login.invalid">Login</button>
+      </form>
+</div>
