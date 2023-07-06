@@ -20,6 +20,15 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { PropertyListComponent } from './property-list/property-list.component';
+import { PropertyComponent } from './property/property.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+// import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
+// import { NgxGalleryAnimation } from 'ngx-gallery';
 import { AboutComponent } from './about/about.component';
 import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
@@ -43,6 +52,10 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
     AdminUsersComponent,
     AdminCategoriesComponent,
     DashbordComponent,
+    PropertyListComponent,
+    PropertyComponent,
+    PostDetailsComponent,
+    CarouselComponent,
     AboutComponent,
     AdminPendingComponent,
     AdminContactComponent,
@@ -60,7 +73,10 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
     NgbAccordionModule,
     NgbTooltipModule,
     ReactiveFormsModule,
-    NgbDropdownModule
+    NgbCarouselModule,
+    NgxPaginationModule,
+    CarouselModule,
+    NgbDropdownModule,
   ],
   providers: [AdminGuard],
   bootstrap: [AppComponent]

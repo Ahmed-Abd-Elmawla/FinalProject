@@ -46,10 +46,17 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
-    
+
     public function role(){
         return $this->belongsTo(Roles::class,'role_id','id');
     }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
+    }
+    
+
 
     protected static function boot()
 {
@@ -63,4 +70,5 @@ class User extends Authenticatable implements MustVerifyEmail
        
     });
 }
+
 }

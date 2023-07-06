@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Card} from '../../app/Model/card'
-
+import { Property } from '../interfaces/property';
+import { HttpClient } from '@angular/common/http';
+import {PostsService} from '../services/posts.service'
 
 @Component({
   selector: 'app-home2details',
@@ -10,16 +12,31 @@ import {Card} from '../../app/Model/card'
 })
 export class Home2detailsComponent implements OnInit {
   card: Card | undefined;
+  properties : Property[] =[];
 
-  constructor(private route: ActivatedRoute) {}
+ propertyItem !: Property;
+  activatedRoute: any;
+ 
+
+  constructor(private route: ActivatedRoute,private req: PostsService,private http: HttpClient,private PostsService :PostsService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const cardId = +params['id']; // Get the 'id' parameter from the route
-      this.card = this.cards.find(card => card.id === cardId);
-    });
+      // const cardTitle = params['title']; // Get the 'name' parameter from the route
+       this.card = this.cards.find(card => card.id === cardId);
+
+       this.req
+       .getPostsByCategoryId(this.activatedRoute.snapshot.params['id'])
+       .subscribe((res: any) => {
+         console.log(res);
+         this.propertyItem  = res;
+       });
+  });
+
+
   }
-  
+
   cards: Card[] = [
     { id: 1, title: 'Apartment', description: 'This is the description for Card 1.', image: 'assets/images/apartment.jpg' },
     { id: 2, title: 'Villa', description: 'This is the description for Card 2.', image: 'assets/images/villa.jpg' },
@@ -32,4 +49,4 @@ export class Home2detailsComponent implements OnInit {
   ];
 }
 
- 
+

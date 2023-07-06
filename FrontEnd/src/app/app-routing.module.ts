@@ -13,6 +13,7 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { DashbordComponent} from './dashbord/dashbord.component';
 import { HomeComponent } from './home/home.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
 import { AboutComponent} from './about/about.component';
 import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
@@ -89,6 +90,10 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent,
   },
+  {
+    path:'post-details/:id',
+    component: PostDetailsComponent ,
+  }
 ];
 
 @NgModule({

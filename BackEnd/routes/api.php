@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use  \App\Http\Controllers\API\NewRateController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\ChatController;
@@ -53,6 +54,11 @@ Route::get('/posts/status/{status}', [\App\Http\Controllers\API\PostController::
 //Categories Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::class);
 
+
+//Rate
+ Route::apiResource('rate', NewRateController::class);
+// Route::get('/rate',[\App\Http\Controllers\API\NewRateController::class,'index']);
+
 //Chat Api's-----------------------------------------------------------------------------------------------------
 Route::post('messages', [ChatController::class, 'sendMessage']);
 Route::get('messages/{senderId}/{receiverId}', [ChatController::class, 'getMessages']);
@@ -60,5 +66,4 @@ Route::get('messages/{senderId}/{receiverId}', [ChatController::class, 'getMessa
 //Contacts Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('contacts',\App\Http\Controllers\API\ContactController::class);
 Route::post('mail',[\App\Http\Controllers\API\ContactController::class,'sendEmail']);
-
 
