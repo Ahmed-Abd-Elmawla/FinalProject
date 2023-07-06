@@ -14,8 +14,9 @@
           </div>
         </div>
         <div class="row">
-          <div *ngIf="allPosts?.length > 0">
+          <div>
             <div class="row row-cols-1 row-cols-md-2 g-4">
+              <h5 *ngIf="allPosts?.length <= 0">You don't create any posts yet.</h5>
               <div *ngFor="let post of allPosts">
                 <div class="col">
                   <div class="card">
@@ -23,6 +24,14 @@
                     <div class="card-body">
                       <h5 class="card-title">{{post.title}}</h5>
                       <h6>Price : {{post.price}} EGP</h6>
+                      <h6 class="d-inline">Status : <span *ngIf="post.status == 'pending'||post.status == 'rejected'" [ngClass]="{ 'text-info': post.status == 'pending', 'text-danger': post.status == 'rejected' }"> {{post.status}}</span></h6>
+                        <select *ngIf="post.status != 'pending'&&post.status != 'rejected'" #mySelect class="form-select w-50 d-inline font-bold" [ngClass]="{ 'text-success': post.status == 'published', 'text-warning': post.status == 'stopped' }"
+                        aria-label=".form-select-lg example" (change)="onSelected(post.id,mySelect.value)">
+                        <option value="" selected disabled>{{post.status}}</option>
+                        <option value="published" class="text-success">published</option>
+                        <option value="stopped" class="text-warning">stopped</option>
+                      </select>
+
                       <hr>
                       <small class="text-muted d-block">Posted on {{post.created_at| date: 'dd/MM/yyyy' }}</small>
                       <small class="text-muted">Updated at {{post.updated_at| date: 'dd/MM/yyyy' }}</small>
@@ -53,9 +62,9 @@
                         </div>
                       </div>
                       <div class="text-center">
-                        <a class="btn btn-outline-primary m-2"
-                          (click)="openUpdate(content,post.id,post.title,post.description,post.price,post.discount,post.location,post.category_id)">update</a>
-                        <a class="btn btn-outline-danger m-2" (click)="delete(post.id)">delete</a>
+                        <a class="btn btn-outline-primary m-2" *ngIf="post.status != 'pending' &&post.status != 'rejected'"
+                          (click)="openUpdate(content,post.id,post.title,post.description,post.price,post.discount,post.location,post.category_id,post.status)">update</a>
+                        <a class="btn btn-outline-danger m-2" *ngIf="post.status != 'pending'" (click)="delete(post.id)">delete</a>
                       </div>
                     </div>
                   </div>
@@ -78,6 +87,9 @@
   </div>
   <div class="modal-body">
     <form enctype="multipart/form-data" class="ps-5 px-5" [formGroup]="form">
+      <div  class="alert alert-warning p-3 mt-1 font-weight-bold" *ngIf="flag==false">
+        <span><i class="fa-solid fa-circle-exclamation"></i> Be careful If you click update, post status will be pending until verify again</span>
+      </div>
       <div class="mb-3">
         <label for="title">title</label>
         <div class="input-group">
@@ -151,7 +163,7 @@
         <div class="input-group">
           <select class="form-select" aria-label="Default select example" name="category" [(ngModel)]="category_id"
             formControlName="category">
-            <option *ngIf="flag==true" value="{{category_id}}" selected disabled>select Category Name</option>
+            <!-- <option *ngIf="flag==true" value="{{category_id}}" selected disabled>select Category Name</option> -->
             <option *ngFor="let category of categories" value="{{ category.id }}" [ngClass]="{ 'selected': category.id === category_id }">
               {{ category.category_name }}
             </option>
@@ -167,15 +179,15 @@
       </div>
       <div class="mb-4">
         <label for="title">Images</label>
-        <div class="input-group">
-          <input *ngIf="flag==true" type="file" id="images" class="form-control" placeholder="enter title"
+        <div class="input-group" *ngIf="flag==true">
+          <input  type="file" id="images" class="form-control" placeholder="enter title"
             name="images[]" multiple formControlName="images" />
         </div>
         <div *ngIf="flag==true">
           <div class="alert alert-danger p-1 mt-1"
             *ngIf="form.controls['images'].touched && form.controls['images'].invalid">
             <span class="d-block" *ngIf="form.controls['images'].errors?.['required']"><i
-                class="fa-solid fa-triangle-exclamation"></i> Please upload some images</span>
+                class="fa-solid fa-triangle-exclamation"></i> Images are required</span>
             <span class="d-block" *ngIf="form.controls['images'].errors?.['fileCount']"><i
                 class="fa-solid fa-triangle-exclamation"></i> Please upload at least 5 images</span>
           </div>

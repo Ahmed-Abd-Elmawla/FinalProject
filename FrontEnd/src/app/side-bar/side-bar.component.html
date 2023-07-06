@@ -10,9 +10,11 @@
     <div class="side_bar">
       <ul>
         <li><a href="/userPosts"><i class="fa-regular fa-newspaper"></i>Your Posts</a></li>
-        <li><a href="/AdminUsers"><i class="fa-solid fa-user-gear"></i>users</a></li>
-        <li><a href="/AdminPosts"><i class="fa-regular fa-newspaper"></i>Posts</a></li>
-        <li><a href="/AdminCategories"><i class="fa-solid fa-tag"></i>Categories</a></li>
+        <li *ngIf="user.role_id==1"><a href="/AdminUsers"><i class="fa-solid fa-user-gear"></i>users</a></li>
+        <li *ngIf="user.role_id==1"><a href="/AdminPosts"><i class="fa-regular fa-newspaper"></i>All Posts</a></li>
+        <li *ngIf="user.role_id==1"><a href="/AdminPending"><i class="fa-solid fa-thumbtack"></i>pending Posts</a></li>
+        <li *ngIf="user.role_id==1"><a href="/AdminCategories"><i class="fa-solid fa-tag"></i>Categories</a></li>
+        <li *ngIf="user.role_id==1"><a href="/AdminContacts"><i class="fa-solid fa-envelope-circle-check"></i>Messages</a></li>
       </ul>
     </div>
   </div>

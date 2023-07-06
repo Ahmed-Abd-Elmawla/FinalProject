@@ -15,4 +15,11 @@ export class UserService {
   login($data:any){
     return this.http.post('http://127.0.0.1:8000/api/login',$data);
   }
+  getAllUsers() {
+    return this.http.get('http://127.0.0.1:8000/api/users');
+  }
+
+  getUserById(id: number) {
+    return this.http.get(`http://127.0.0.1:8000/api/users/${id}`);
+  }
 }

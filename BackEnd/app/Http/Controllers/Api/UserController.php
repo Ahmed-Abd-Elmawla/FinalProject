@@ -17,7 +17,6 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        // return response()->json($request->name);
 
             $validator = Validator::make($request->all(), [
               'name' => 'required|string|max:255',
@@ -36,8 +35,11 @@ class UserController extends Controller
             ]);
           
             Auth::login($user);
+            $user->last_seen_at = now();
+            $user->save();
           
-            // return response()->json(['message' => 'Registration successful'], 200);
+event(new UserStatusChanged($user->id, $user->last_seen_at, true));
+            
             return response(auth()->user());
           
     }
@@ -49,14 +51,17 @@ class UserController extends Controller
         
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
-
-                // return response()->json(['message' => 'Login succesfully']);
+              $user = Auth::user();
+              $user->last_seen_at = now();
+              $user->save();
+               
                return response()->json(auth()->user());
         
             } else {
               return response()->json(['message' => 'Login failed']);
             }
-          
+        
+
     }
 
     /**
@@ -65,5 +70,23 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getAllUsers()
+    {
+        $users = User::all();
+
+        return response()->json($users);
+    }
+
+    public function getUserById($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        return response()->json($user);
     }
 }
