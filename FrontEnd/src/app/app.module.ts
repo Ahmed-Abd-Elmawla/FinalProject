@@ -12,13 +12,25 @@ import { HomeComponent } from './home/home.component';
 import { Home2Component } from './home2/home2.component';
 import { Home2detailsComponent } from './home2details/home2details.component';
 import { Home2cardComponent } from './home2card/home2card.component';
+import { ChatComponent } from './chat/chat.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
-import { NgbAccordionModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminPostsComponent } from './admin-posts/admin-posts.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { PropertyListComponent } from './property-list/property-list.component';
+import { PropertyComponent } from './property/property.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AboutComponent } from './about/about.component';
+import { AdminPendingComponent } from './admin-pending/admin-pending.component';
+import { AdminGuard } from './Guards/admin.guard';
+import { AdminContactComponent } from './admin-contact/admin-contact.component';
+
 
 @NgModule({
   declarations: [
@@ -30,12 +42,20 @@ import { DashbordComponent } from './dashbord/dashbord.component';
     Home2Component,
     Home2detailsComponent,
     Home2cardComponent,
+    ChatComponent,
     UserprofileComponent,
     AdminPostsComponent,
     SideBarComponent,
     AdminUsersComponent,
     AdminCategoriesComponent,
-    DashbordComponent
+    DashbordComponent,
+    PropertyListComponent,
+    PropertyComponent,
+    PostDetailsComponent,
+    CarouselComponent,
+    AboutComponent,
+    AdminPendingComponent,
+    AdminContactComponent,
   ],
 
   imports: [
@@ -49,9 +69,12 @@ import { DashbordComponent } from './dashbord/dashbord.component';
     FormsModule,
     NgbAccordionModule,
     NgbTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbCarouselModule,
+    NgxPaginationModule,
+    NgbDropdownModule,
   ],
-  providers: [],
+  providers: [AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

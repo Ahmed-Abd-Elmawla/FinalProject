@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -44,7 +45,7 @@ class PostController extends Controller
                 $images[] = $image_name;
             }
         }
-        $new_post = Post::create([
+            Post::create([
             'user_id' => $data["user_id"],
             'category_id' => $data["category_id"],
             'title' => $data["title"],
@@ -54,7 +55,7 @@ class PostController extends Controller
             'location' => $data["location"],
             'images' => $images
         ]);
-        return response()->json(['message' => 'Post created successfully', 'post' => $new_post]);
+        return response()->json(['message' => 'Post created successfully']);
     }
 
     /**
@@ -71,7 +72,18 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
 
     {
-        // dd($request->all());
+        if ($post->status === 'pending') {
+            return response()->json(['message' => "Cannot update a pending post."], 403);
+        }
+        if ($request->has('status')) {
+            $request->validate([
+                'status' => ['required', Rule::in(['published', 'stopped'])],
+            ]);
+            $post->update([
+                'status' => $request->status
+            ]);
+            return response()->json(['message' => "Status has been updated."]);
+        }
         $data = $request->validate([
             "category_id" => 'required|integer',
             "title" => 'required|string',
@@ -80,16 +92,18 @@ class PostController extends Controller
             "discount" => "nullable|numeric",
             "location" => "required|string",
             "images" => ["nullable", "array", "min:5"],
-            "images.*" => "nullable"
+            "images.*" => "nullable",
         ]);
-        $post->update([
-            'category_id' => $data["category_id"],
-            'title' => $data["title"],
-            'description' => $data["description"],
-            'price' => $data["price"],
-            'discount' => $data["discount"] ?? 0,
-            'location' => $data["location"]
-        ]);
+
+            $post->update([
+                'category_id' => $data["category_id"],
+                'title' => $data["title"],
+                'description' => $data["description"],
+                'price' => $data["price"],
+                'discount' => $data["discount"] ?? 0,
+                'location' => $data["location"],
+                'status'=>'pending'
+            ]);
 
         $images = [];
         if ($request->has('images')) {
@@ -106,7 +120,8 @@ class PostController extends Controller
                 $images[] = $image_name;
             }
             $post->update([
-                'images' => $images
+                'images' => $images,
+                'status'=>'pending'
             ]);
             return response()->json(['message' => 'Post updated successfully', 'post' => $post]);
         }
@@ -143,7 +158,27 @@ class PostController extends Controller
      */
     public function getByCategoryId($category_id)
     {
-        $posts = Post::where('category_id', $category_id)->get();
+        $posts = Post::where(['category_id'=> $category_id,'status'=>'published'])->get();
+        return response()->json($posts);
+    }
+
+    /**
+     * Update post status only.
+     */
+    public function updateStatus(Request $request, Post $post)
+    {
+        $post->update([
+            'status' => $request->status
+        ]);
+        return response()->json(['message' => "Post status updated."]);
+    }
+
+    /**
+     * Get posts by category_id.
+     */
+    public function getByStatus($status)
+    {
+        $posts = Post::where('status', $status)->get();
         return response()->json($posts);
     }
 }

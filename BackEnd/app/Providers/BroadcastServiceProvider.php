@@ -14,6 +14,19 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
 
-        require base_path('routes/channels.php');
+
+        Broadcast::channel('online-status', function ($user) {
+            return true; // Change this logic based on your authentication requirements
+        });
+    
+        Broadcast::event(UserStatusChanged::class, function ($event) {
+            return [
+                'userId' => $event->userId,
+                'lastSeenAt' => $event->lastSeenAt,
+                'isOnline' => $event->isOnline,
+            ];
+        });
     }
+    
+        // require base_path('routes/channels.php');
 }

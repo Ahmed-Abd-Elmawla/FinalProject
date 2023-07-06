@@ -1,3 +1,4 @@
+
 <div class="container my-5 bg-light p-4">
     <form method="post" class=" form-group" enctype="multipart/form-data"  [formGroup]="Register" (ngSubmit)="registerUser()">
         <h3 class=" text-center"><i class="fas fa-user"></i> Register </h3>
@@ -126,24 +127,85 @@
               <span *ngIf="Register.controls['confirmpassword'].errors?.['required']" class="text-danger">
                       this filed is required
               </span>
-             
-            
-           </span>
+<div class="body">
+  <div class="overlay"></div>
+	<div class="register-container">
+		<div class="welcome-div">
+			<h1>Welcome to our website!</h1>
+			<p>Join our community and get access to exclusive content.</p>
+		</div>
 
-           <span *ngIf="Register.controls['confirmpassword'].touched ">
-                
-            
-            <span *ngIf="Register.controls['confirmpassword'].value != Register.controls['password'].value" class="text-danger">
-              passwords not the same ...
-             </span>
-          
+    <div class="form-div">
+     
+    <form method="post" class=" form-group" [formGroup]="Register" (ngSubmit)="registerUser()">
+      <div class="form-group">
+      <label for="username" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name" >
+      <span *ngIf="Register.controls['name'].touched && Register.controls['name'].invalid">
+
+        <span *ngIf="Register.controls['name'].errors?.['required']" class="text-danger">
+                this filed is required
+        </span>
+        <span *ngIf="Register.controls['name'].errors?.['minlength']" class="text-danger">
+            minLength is 5
          </span>
 
-          </div>
-        </div>
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email"   >
+        <span *ngIf="Register.controls['email'].touched && Register.controls['email'].invalid">
+
+          <span *ngIf="Register.controls['email'].errors?.['required']" class="text-danger">
+                  this filed is required
+          </span>
+          <span *ngIf="Register.controls['email'].errors?.['pattern']" class="text-danger">
+             this not valid Email
+           </span>
+
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password"  >
+
+        <span *ngIf="Register.controls['password'].touched && Register.controls['password'].invalid">
+
+          <span *ngIf="Register.controls['password'].errors?.['required']" class="text-danger">
+                  this filed is required
+          </span>
+          <span *ngIf="Register.controls['password'].errors?.['minlength']" class="text-danger">
+             minLength is 8 chars
+
+           </span>
+
+       </span>
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="password" formControlName="confirmpassword"   >
+
+        <span *ngIf="Register.controls['confirmpassword'].touched && Register.controls['confirmpassword'].invalid">
+
+          <span *ngIf="Register.controls['confirmpassword'].errors?.['required']" class="text-danger">
+                  this filed is required
+          </span>
 
 
-    
-        <button type="submit" class="btn btn-primary" [disabled]="Register.invalid">Register</button>
+       </span>
+
+       <span *ngIf="Register.controls['confirmpassword'].touched ">
+
+
+        <span *ngIf="Register.controls['confirmpassword'].value != Register.controls['password'].value" class="text-danger">
+          passwords not the same ...
+         </span>
+     </span>
+      </div>
+        <button type="submit"  class="btn btn-register btn-block" [disabled]="Register.invalid">Register</button>
       </form>
 </div>
+
+ </div>
+

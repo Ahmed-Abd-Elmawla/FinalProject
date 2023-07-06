@@ -12,8 +12,8 @@ class Post extends Model
     protected $casts = [
         'images' => 'array',
     ];
-    public function premiumPost()
+    public function premium()
     {
-        return $this->hasOne(PremiumPost::class);
+        return $this->hasOne(Premium::class);
     }
 }
