@@ -1,3 +1,7 @@
-body{
-  margin-top: 77px !important;
+.main{
+  margin-top: 120px !important;
+  scroll-behavior: smooth;
+}
+img:hover {
+  transform: scale(1.1); 
 }
