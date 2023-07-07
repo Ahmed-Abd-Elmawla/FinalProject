@@ -126,7 +126,7 @@ export class ChatComponent implements OnInit {
   checkOnlineStatus(): void {
     setInterval(() => {
       this.users.forEach(user => {
-        const threshold = new Date().getTime() - 5 * 60 * 1000; 
+        const threshold = new Date().getTime() - 10 * 60 * 1000; 
         const lastSeenAt = new Date(user.last_seen_at).getTime();
         user.isOnline = lastSeenAt > threshold;
       });
@@ -158,3 +158,4 @@ export class ChatComponent implements OnInit {
   }
   
 }
+
