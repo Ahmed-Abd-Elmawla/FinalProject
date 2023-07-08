@@ -30,7 +30,9 @@ import { AboutComponent } from './about/about.component';
 import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
+import { AdminPendingUComponent } from './admin-pending-u/admin-pending-u.component';
 import { FooterComponent } from './footer/footer.component';
+
 
 
 @NgModule({
@@ -57,6 +59,7 @@ import { FooterComponent } from './footer/footer.component';
     AboutComponent,
     AdminPendingComponent,
     AdminContactComponent,
+    AdminPendingUComponent,
     FooterComponent,
   ],
 

@@ -23,3 +23,11 @@
     margin-bottom: 8px;
     font-weight: bold;
   }
+
+  .msg{
+    width: 100% !important;
+    height: 200px !important;
+    word-wrap: break-word;
+    font-weight: 500;
+    font-size: 20px;
+  }

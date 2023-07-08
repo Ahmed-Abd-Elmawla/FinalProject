@@ -12,6 +12,14 @@ class Post extends Model
     protected $casts = [
         'images' => 'array',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
     public function premium()
     {
         return $this->hasOne(Premium::class);
