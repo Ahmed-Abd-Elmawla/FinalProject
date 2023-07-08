@@ -28,7 +28,7 @@ interface Image {
   // standalone: true,
   // imports: [NgbCarouselModule, NgIf]
 export class PostDetailsComponent {
- 
+
  propertyItem !: Property;
 
 

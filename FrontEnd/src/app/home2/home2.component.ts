@@ -10,7 +10,7 @@ import { CategoriesService } from '../services/categories.service';
 })
 export class Home2Component {
 
-  cards!:any;
+  cards:Card[]=[];
 
   constructor(
     private req:CategoriesService

@@ -14,7 +14,7 @@ use function PHPUnit\Framework\returnSelf;
 
 class UserController extends Controller
 {
-   
+
 
     public function register(Request $request)
     {
@@ -29,7 +29,7 @@ class UserController extends Controller
               'email' => 'required|string|email|max:255|unique:users',
               'password' => 'required'
             ]);
-          
+
             if ($validator->fails()) {
               return response()->json(['errors' => $validator->errors()], 422);
             }
@@ -51,34 +51,34 @@ class UserController extends Controller
               'password' => Hash::make($request->password),
               'role_id'=>3
             ]);
-          
+
             Auth::login($user);
             $user->last_seen_at = now();
             $user->save();
-          
-event(new UserStatusChanged($user->id, $user->last_seen_at, true));
-            
+
+// event(new UserStatusChanged($user->id, $user->last_seen_at, true));
+
             return response(auth()->user());
-          
+
     }
 
 
-  
+
     public function login(Request $request)
     {
-        
+
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
               $user = Auth::user();
               $user->last_seen_at = now();
               $user->save();
-               
+
                return response()->json(auth()->user());
-        
+
             } else {
               return response()->json(['message' => 'Login failed']);
             }
-        
+
 
     }
 

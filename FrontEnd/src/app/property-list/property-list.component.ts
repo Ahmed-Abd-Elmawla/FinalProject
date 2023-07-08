@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {PropertyListService} from '../services/property-list.service'
+import {PostsService} from '../services/posts.service'
 import {Property} from '../interfaces/property'
 @Component({
   selector: 'app-property-list',
@@ -12,10 +12,11 @@ export class PropertyListComponent {
   totalLength:any;
   p:number=1;
   itemsPerPage:number= 3
-  constructor(public router: Router,private PropertyListService :PropertyListService ){}
+  stat = "published"
+  constructor(public router: Router,private PostsService :PostsService ){}
   ngOnInit(){
 
-      this.PropertyListService.getAllPosts().subscribe((res:any)=>{
+    this.PostsService.getPostsByStatus(this.stat).subscribe((res:any)=>{
       this.properties = res;
       this.totalLength=res.length;
       console.log(res);
