@@ -29,12 +29,12 @@
     <div class="col-md-8">
       <div class="container card mt-3 shadow" style="background-color: rgba(152, 191, 228, 0.705);">
         <h2 style="color: black;"><img [src]="logoUrl" style="height: 5rem; width: 5rem;"><span class="text-primary" style="font-family: 'Great Vibes', cursive;font-family: 'Lobster', cursive;">{{username}}</span> Chat</h2>
-        <div class="bg-white chat-container" #chatContainer>
-          <div class="list-group border-bottom scrollarea" style="min-height: 350px;">
+        <div class="bg-white chat-container overflow-auto" #chatContainer>
+          <div class="list-group border-bottom scrollarea" style="height: 350px;">
             <ng-container *ngFor="let msg of filteredMessages">
               <span>
-                <span *ngIf="msg.sender_id === (selectedUser?.id || null)" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white m-1 bg-primary blue">{{ msg.message }}</span>
-                <span *ngIf="msg.receiver_id === (selectedUser?.id || null)" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white m-1 bg-success clear">{{ msg.message }}</span>
+                <span *ngIf="msg.sender_id === (selectedUser?.id || null)" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white m-1 bg-success clear ">{{ msg.message }}</span>
+                <span *ngIf="msg.receiver_id === (selectedUser?.id || null)" class="flex list-group-item rounded-pill d-inline-flex text-wrap text-white m-1 bg-primary blue ">{{ msg.message }}</span>
               </span>
             </ng-container>
           </div>
@@ -52,5 +52,14 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
 
 

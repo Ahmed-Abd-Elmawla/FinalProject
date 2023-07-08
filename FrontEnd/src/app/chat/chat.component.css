@@ -1,6 +1,7 @@
 .container-fluid{
   margin-top: 80px;
 }
+
 .blue {
    float: left;
    clear: both;
@@ -10,11 +11,7 @@
     float: right;
     clear: both;
   }
-  .flex{
-    display: flex;
-    flex-wrap: wrap;
-  }
-
+  
   .hoverable-item:hover {
     background-color: #2da3da;
     cursor: pointer;
@@ -29,3 +26,5 @@
     padding: 2px;
     box-sizing: border-box;
   }
+
+  
