@@ -19,7 +19,6 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:15|max:255',
             'number' => 'required|unique:users|min:11|max:11',
@@ -45,6 +44,7 @@ class UserController extends Controller
                 $images[] = $filename;
             }
         }
+
 
 
         $file_ = $request->file('cover');

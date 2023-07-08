@@ -3,34 +3,30 @@
 <div class="container">
   <div class="post-details">
     <div class="rows ">
-      <!-- <div class="col-md-6 images">
-        <img src="http://localhost:8000/post_images/{{propertyItem.images[0]}}" alt="Post Image" class="img-fluid post-image">
-      </div> -->
-      <div class=" imag col-md-6">
-      <!-- <div class=" show" *ngFor="let image of propertyItem.images">
-        <img  src="http://localhost:8000/post_images/{{ image }}" alt="Image">
-      </div> -->
-    
-        <section class="gallery" *ngFor="let image of propertyItem.images">
-            <div class="card">
-                <img src="http://localhost:8000/post_images/{{ image }}" alt="">
-            </div>
-            </section>
-      </div>
-      <!-- <owl-carousel-o [options]="carouselOptions">
-        <ng-container *ngFor="let image of propertyItem.images">
-          <div class="item">
-            <div class="carousel-image">
-              <img src="http://localhost:8000/post_images/{{ image }}" alt="Property image">
+
+      <div class="imag">
+        <div id="carouselExampleRide" class="carousel slide show" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let image of propertyItem.images; let i = index" [class.active]="i === 0">
+              <img src="http://localhost:8000/post_images/{{ image }}" class="d-block w-100" alt="...">
             </div>
           </div>
-        </ng-container>
-      </owl-carousel-o> -->
-     
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+
       <div class="col-md-6 contant">
-        <p class="post-title">{{propertyItem.title}}</p>
-        <p class="post-price">{{propertyItem.price}}EGP</p>
-        <p class="post-description">{{propertyItem.description}}</p>
+        <p class="post-title"> <b>Title :</b> {{propertyItem.title}}</p>
+        <p class="post-price"><b> Price :</b> {{propertyItem.price}}EGP</p>
+        <p class="post-description"><b class="post-price">Description :</b> {{propertyItem.description}}</p>
         <p class="post-location"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{propertyItem.location}}</p>
       </div>
     </div>
