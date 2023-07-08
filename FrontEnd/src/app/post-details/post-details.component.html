@@ -4,13 +4,12 @@
   <div class="post-details">
     <div class="rows ">
 
-      <div class=" imag col-md-6">
-        <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
-          <div class="carousel-inner show">
-            <div class="carousel-item active"*ngFor="let image of propertyItem.images">
+      <div class="imag">
+        <div id="carouselExampleRide" class="carousel slide show" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let image of propertyItem.images; let i = index" [class.active]="i === 0">
               <img src="http://localhost:8000/post_images/{{ image }}" class="d-block w-100" alt="...">
             </div>
-
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -21,22 +20,13 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-
-        <!-- <ngb-carousel >
-          <ng-template ngbSlide>
-            <div class="picsum-img-wrapper" *ngFor="let image of propertyItem.images">
-              <img src="http://localhost:8000/post_images/{{ image }}" alt="Random first slide" />
-            </div>
-
-          </ng-template>
-        </ngb-carousel> -->
       </div>
 
 
       <div class="col-md-6 contant">
-        <p class="post-title">{{propertyItem.title}}</p>
-        <p class="post-price">{{propertyItem.price}}EGP</p>
-        <p class="post-description">{{propertyItem.description}}</p>
+        <p class="post-title"> <b>Title :</b> {{propertyItem.title}}</p>
+        <p class="post-price"><b> Price :</b> {{propertyItem.price}}EGP</p>
+        <p class="post-description"><b class="post-price">Description :</b> {{propertyItem.description}}</p>
         <p class="post-location"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{propertyItem.location}}</p>
       </div>
     </div>

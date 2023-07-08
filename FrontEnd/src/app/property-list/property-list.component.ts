@@ -11,7 +11,7 @@ export class PropertyListComponent {
   properties : Property[] =[]
   totalLength:any;
   p:number=1;
-  itemsPerPage:number= 3
+  itemsPerPage:number= 6
   stat = "published"
   constructor(public router: Router,private PostsService :PostsService ){}
   ngOnInit(){
