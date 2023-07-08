@@ -1,0 +1,89 @@
+
+<div class="body">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <app-side-bar></app-side-bar>
+      </div>
+      <div class="col-9">
+        <div class="row mb-3">
+          <div class="col p-0 ps-1">
+            <h3>Pending Users</h3>
+          </div>
+        </div>
+        <div class="row p-0 ps-1">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="allUsers?.length ==0" class="text-center">
+                <td colspan="4">No Pending Posts</td></tr>
+              <tr *ngFor="let user of allUsers; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                  <button class="btn btn-info" placement="bottom" ngbTooltip="view user" (click)="view(user,content)"><i class="fa-solid fa-eye"></i></button>
+                  <button class="btn btn-success ms-2" placement="bottom" ngbTooltip="verify user" (click)="update(user)"><i class="fa-solid fa-thumbs-up"></i></button>
+                  <button class="btn btn-danger ms-2" placement="bottom" ngbTooltip="reject user" (click)="delete(user)"><i class="fa-solid fa-thumbs-down"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">User Information</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body overflow-hidden mt-3 p-3 mb-2">
+    <div class="row">
+      <div class="col-6">
+        <label for="name" class="label text-center bg-secondary-subtle p-1 ps-2 px-2 mx-1 mb-2">Name</label><label for="name">{{userData.name}}</label>
+      </div>
+      <div class="col-6">
+        <label for="name" class="label text-center bg-secondary-subtle p-1 ps-2 px-2 mx-1 mb-2">Personal ID</label><label for="name">{{userData.personal_id}}</label>
+      </div>
+      <div class="col-6">
+        <label for="name" class="label text-center bg-secondary-subtle p-1 ps-2 px-2 mx-1 mb-2">Email</label><label for="name">{{userData.email}}</label>
+      </div>
+      <div class="col-6">
+        <label for="name" class="label text-center bg-secondary-subtle p-1 ps-2 px-2 mx-1 mb-2">Phone</label><label for="name">0{{userData.number}}</label>
+      </div>
+    </div>
+<div class="row text-center mt-3 mb-2">
+  <div class="col-12">
+    <label for="name" class="text-center bg-secondary-subtle p-1 ps-2 px-2 mx-1 mb-2 w-100">Identity Images</label>
+  </div>
+</div>
+<div class="row text-center">
+
+  <div class="col-6" *ngFor="let image of imageArray">
+    <img src="http://localhost:8000/users_images/{{image}}" alt="">
+  </div>
+</div>
+<div class="row text-center mt-3 mb-2">
+  <div class="col-12">
+    <label for="name" class="text-center bg-secondary-subtle p-1 ps-2 px-2 mx-1 mb-2 w-100">Profile Image</label>
+  </div>
+</div>
+<div class="row text-center">
+  <div class="col-12" >
+    <img src="http://localhost:8000/users_images/{{userData.cover}}" alt="" srcset="">
+  </div>
+</div>
+	</div>
+</ng-template>
+
+
