@@ -14,7 +14,7 @@ export class ContactService {
 
   //user send messages -----------------------------------------------------------------
   userSendMessage(data: any) {
-    return this.http.post('http://localhost:8000/api/contacts', data);
+    return this.http.post('http://localhost:8000/api/c', data);
   }
 
   //Admin send reply mail for received message------------------------------------------

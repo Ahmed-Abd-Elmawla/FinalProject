@@ -30,6 +30,8 @@ import { AboutComponent } from './about/about.component';
 import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
+import { MapComponent } from './map/map.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
@@ -56,6 +58,8 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
     AboutComponent,
     AdminPendingComponent,
     AdminContactComponent,
+    MapComponent,
+
   ],
 
   imports: [
@@ -73,6 +77,7 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
     NgbCarouselModule,
     NgxPaginationModule,
     NgbDropdownModule,
+    GoogleMapsModule,
   ],
   providers: [AdminGuard],
   bootstrap: [AppComponent]

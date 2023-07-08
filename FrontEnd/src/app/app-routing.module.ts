@@ -18,6 +18,7 @@ import { AboutComponent} from './about/about.component';
 import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
+import { MapComponent } from './map/map.component';
 
 
 const routes: Routes = [
@@ -75,11 +76,11 @@ const routes: Routes = [
 },
 
   { path: 'home2',
-   component: Home2Component 
+   component: Home2Component
   },
 
   { path: 'home2card-details/:id',
-   component: Home2detailsComponent 
+   component: Home2detailsComponent
   },
 
   {
@@ -94,7 +95,11 @@ const routes: Routes = [
   {
     path:'post-details/:id',
     component: PostDetailsComponent ,
-  }
+  },
+  {
+    path: 'map',
+    component: MapComponent,
+  },
 ];
 
 @NgModule({
