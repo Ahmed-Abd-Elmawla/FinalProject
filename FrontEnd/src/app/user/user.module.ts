@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
+import { PaymentComponent } from './payment/payment.component';
 
 
 
@@ -13,7 +14,8 @@ import { AppRoutingModule } from '../app-routing.module';
   declarations: [
     RegisterComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,

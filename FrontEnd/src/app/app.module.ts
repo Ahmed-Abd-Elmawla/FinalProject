@@ -32,6 +32,8 @@ import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { AdminPendingUComponent } from './admin-pending-u/admin-pending-u.component';
 import { FooterComponent } from './footer/footer.component';
+import { StripeModule } from "stripe-angular";
+import { PaymentFormComponent } from './payment-form/payment-form.component'
 
 
 
@@ -61,6 +63,8 @@ import { FooterComponent } from './footer/footer.component';
     AdminContactComponent,
     AdminPendingUComponent,
     FooterComponent,
+    PaymentFormComponent,
+    
   ],
 
   imports: [
@@ -78,6 +82,7 @@ import { FooterComponent } from './footer/footer.component';
     NgbCarouselModule,
     NgxPaginationModule,
     NgbDropdownModule,
+   
   ],
   providers: [AdminGuard],
   bootstrap: [AppComponent]

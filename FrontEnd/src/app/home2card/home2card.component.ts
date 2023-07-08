@@ -10,4 +10,8 @@ import { CategoriesService } from '../services/categories.service';
 })
 export class Home2cardComponent {
   @Input() card!: any;
+
+
+  
+
 }
