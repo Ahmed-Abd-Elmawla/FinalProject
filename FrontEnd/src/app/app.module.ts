@@ -32,6 +32,7 @@ import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { MapComponent } from './map/map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     AdminPendingComponent,
     AdminContactComponent,
     MapComponent,
+    FooterComponent,
 
   ],
 
