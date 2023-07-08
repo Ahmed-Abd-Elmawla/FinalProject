@@ -23,13 +23,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'number',
         'personal_id',
-        'image',
+        'images',
+        'cover',
         'email',
         'password',
         'role_id',
+        'status'
     ];
 
-    
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -54,12 +56,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role(){
         return $this->belongsTo(Roles::class,'role_id','id');
     }
-
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
     public function rates()
     {
         return $this->hasMany(Rate::class);
     }
-    
+
 
 
     protected static function boot()
@@ -71,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
     });
 
     static::deleting(function ($user) {
-       
+
     });
 }
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -24,20 +25,35 @@ export class LoginComponent {
   }
 
   userLogin(){
-    const formdata=new FormData();
+    const formdata = new FormData();
 
-    formdata.append('email',this.login.get('email')?.value);
-    formdata.append('password',this.login.get('password')?.value);
+    formdata.append('email', this.login.get('email')?.value);
+    formdata.append('password', this.login.get('password')?.value);
 
-
-
-    this.userserv.login(formdata).subscribe((result:any)=>{
-        console.log(result.email);
-         localStorage.setItem('user',JSON.stringify(result));
-        if( result.email){
-          // this.router.navigate(['']);
-          window.location.href = '' ;
-        }
+    this.userserv.login(formdata).subscribe((result: any) => {
+      console.log(result);
+      if (result.message == false) {
+        Swal.fire('No account found', 'please register again', 'error');
+      } else if (result.message == true) {
+        Swal.fire(
+          'Not verified account',
+          'we will mail you when verify it',
+          'warning'
+        );
+      } else {
+        localStorage.setItem('user', JSON.stringify(result));
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Logged in successfully',
+          showConfirmButton: false,
+          timer: 3000,
+        }).then(() => {
+          setTimeout(() => {
+            window.location.href = '';
+          }, 0);
+        });
+      }
     });
   }
 
