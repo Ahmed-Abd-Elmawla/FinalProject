@@ -31,7 +31,9 @@ Route::post('register',[UserController::class,'register']);
 Route::post('login',[UserController::class,'login']);
 Route::get('users', [UserController::class, 'getAllUsers']);
 Route::get('users/{id}', [UserController::class, 'getUserById']);
-
+Route::delete('users/{user}', [UserController::class, 'destroy']);
+Route::post('users/update/{user}', [UserController::class, 'updateUser']);
+Route::get('users/status/{status}', [UserController::class, 'getUsersByStatus']);
 
 //Comments Api's-----------------------------------------------------------------------------------------------------
 Route::get('comments', [CommentController::class, 'index']);

@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with(['user', 'category'])->get();
         return response()->json($posts);
     }
 
@@ -158,7 +158,7 @@ class PostController extends Controller
      */
     public function getByCategoryId($category_id)
     {
-        $posts = Post::where(['category_id'=> $category_id,'status'=>'published'])->get();
+        $posts = Post::with(['user', 'category'])->where(['category_id'=> $category_id,'status'=>'published'])->get();
         return response()->json($posts);
     }
 
@@ -178,7 +178,7 @@ class PostController extends Controller
      */
     public function getByStatus($status)
     {
-        $posts = Post::where('status', $status)->get();
+        $posts = Post::with(['user', 'category'])->where('status', $status)->get();
         return response()->json($posts);
     }
 }
