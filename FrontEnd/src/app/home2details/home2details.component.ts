@@ -15,12 +15,19 @@ export class Home2detailsComponent implements OnInit {
   properties : Property[] =[];
 
  propertyItem !: Property;
+ 
   activatedRoute: any;
  
+  handler:any = null;
+
 
   constructor(private route: ActivatedRoute,private req: PostsService,private http: HttpClient,private PostsService :PostsService) {}
 
   ngOnInit() {
+
+    this.loadStripe();
+
+
     this.route.params.subscribe(params => {
       const cardId = +params['id']; // Get the 'id' parameter from the route
       // const cardTitle = params['title']; // Get the 'name' parameter from the route
@@ -47,6 +54,54 @@ export class Home2detailsComponent implements OnInit {
     { id: 7, title: 'Building', description: 'This is the description for Card 7.', image: 'assets/images/building.jpg' },
     { id: 8, title: 'TwonHouse', description: 'This is the description for Card 8.', image: 'assets/images/twonhouse.jpg' }
   ];
+
+
+
+
+ 
+  pay(amount: any) {    
+ 
+    var handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51MKiaiAKCs7rV1K1osHQXFDoYC6TDT1uEPp6TIcWLFMzKV4dv4geHaOOk7aPgFZkWAzkR02Ecyjhiu5LrGk1mgWO00c3PiUAec',
+      locale: 'auto',
+      token: function (token: any) {
+        // You can access the token ID with `token.id`.
+        // Get the token ID to your server-side code for use.
+        console.log(token)
+      
+      }
+    });
+ 
+    handler.open({
+      name: 'Demo Site',
+     
+      amount: amount * 100
+    });
+ 
+  }
+ 
+  loadStripe() {
+     
+    if(!window.document.getElementById('stripe-script')) {
+      var s = window.document.createElement("script");
+      s.id = "stripe-script";
+      s.type = "text/javascript";
+      s.src = "https://checkout.stripe.com/checkout.js";
+      s.onload = () => {
+        this.handler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51MKiaiAKCs7rV1K1osHQXFDoYC6TDT1uEPp6TIcWLFMzKV4dv4geHaOOk7aPgFZkWAzkR02Ecyjhiu5LrGk1mgWO00c3PiUAec',
+          locale: 'auto',
+          token: function (token: any) {
+           
+            console.log(token)
+            alert('Payment Success!!');
+          }
+        });
+      }
+       
+      window.document.body.appendChild(s);
+    }
+  }
 }
 
 

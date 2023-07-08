@@ -1,5 +1,6 @@
 
 <div class="container my-5 bg-light p-4">
+
     <form method="post" class=" form-group" enctype="multipart/form-data"  [formGroup]="Register" (ngSubmit)="registerUser()">
         <h3 class=" text-center"><i class="fas fa-user"></i> Register </h3>
 
@@ -124,20 +125,27 @@
             
             <span *ngIf="Register.controls['confirmpassword'].touched && Register.controls['confirmpassword'].invalid">
                 
-              <span *ngIf="Register.controls['confirmpassword'].errors?.['required']" class="text-danger">
+               <span *ngIf="Register.controls['confirmpassword'].errors?.['required']" class="text-danger">
                       this filed is required
-              </span>
-<div class="body">
-  <div class="overlay"></div>
-	<div class="register-container">
-		<div class="welcome-div">
-			<h1>Welcome to our website!</h1>
-			<p>Join our community and get access to exclusive content.</p>
-		</div>
+                </span>
 
-    <div class="form-div">
+            </span>
+          </div>
+        </div>
+
+
+        <button type="submit"  class="btn btn-register btn-block" [disabled]="Register.invalid">Register</button>
+      <!-- <div class="body">
+        <div class="overlay"></div>
+        <div class="register-container">
+          <div class="welcome-div">
+            <h1>Welcome to our website!</h1>
+            <p>Join our community and get access to exclusive content.</p>
+          </div>
+
+          <div class="form-div"> -->
      
-    <form method="post" class=" form-group" [formGroup]="Register" (ngSubmit)="registerUser()">
+    <!-- <form method="post" class=" form-group" [formGroup]="Register" (ngSubmit)="registerUser()">
       <div class="form-group">
       <label for="username" class="form-label">Name</label>
       <input type="text" class="form-control" id="name" formControlName="name" >
@@ -204,8 +212,8 @@
      </span>
       </div>
         <button type="submit"  class="btn btn-register btn-block" [disabled]="Register.invalid">Register</button>
-      </form>
-</div>
+      </form> -->
 
- </div>
+
+ <!-- </div> -->
 
