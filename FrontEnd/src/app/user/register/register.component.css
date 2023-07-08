@@ -3,9 +3,10 @@
   background-size: cover;
   background-position: center;
   font-family: 'Roboto', sans-serif;
-  height: 100vh;
+  /* height: 100vh; */
   font-style: italic;
   position: relative;
+  margin-bottom:20px
 }
 
 .overlay {
@@ -27,7 +28,7 @@
 }
 .welcome-div {
   flex-basis: 40%;
-  padding: 50px;
+  padding: 100px;
   text-align: center;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.7);
@@ -43,7 +44,7 @@
 }
 .form-div {
   flex-basis: 40%;
-  margin-top: 50px;
+  margin-top: 30px;
   padding: 30px;
   padding-bottom: 50px;
   background-color:#fff;

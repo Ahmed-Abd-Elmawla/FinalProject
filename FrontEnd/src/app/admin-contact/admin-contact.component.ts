@@ -76,12 +76,10 @@ export class AdminContactComponent {
       "status":"Replied"
     }
 
-    let timerInterval: any;
     Swal.fire({
       title: 'Sending email',
       html: 'please wait ...',
-      timer: 6000,
-      timerProgressBar: true,
+      timer: 10000,
       didOpen: () => {
         Swal.showLoading();
         this.req.sendMail(formData).subscribe(

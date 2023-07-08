@@ -18,6 +18,7 @@ import { AboutComponent} from './about/about.component';
 import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
+import { AdminPendingUComponent } from './admin-pending-u/admin-pending-u.component';
 
 
 
@@ -43,8 +44,13 @@ const routes: Routes = [
     canActivate:[AdminGuard],
   },
   {
-    path: 'AdminPending',
+    path: 'AdminPendingPosts',
     component: AdminPendingComponent,
+    canActivate:[AdminGuard],
+  },
+  {
+    path: 'AdminPendingUsers',
+    component: AdminPendingUComponent,
     canActivate:[AdminGuard],
   },
   {
@@ -76,11 +82,11 @@ const routes: Routes = [
 },
 
   { path: 'home2',
-   component: Home2Component 
+   component: Home2Component
   },
 
   { path: 'home2card-details/:id',
-   component: Home2detailsComponent 
+   component: Home2detailsComponent
   },
 
   {

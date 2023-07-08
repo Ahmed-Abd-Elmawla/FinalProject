@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { PostsService } from '../services/posts.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-admin-pending',
@@ -10,13 +11,23 @@ import { PostsService } from '../services/posts.service';
 export class AdminPendingComponent {
  //global variables ---------------------------------------------------------------------------------
  allPosts!: any;
- constructor(private post: PostsService) {}
+ postData!:any;
+ constructor(private post: PostsService,private modalService: NgbModal) {}
 
  ngOnInit() {
    this.post.getPostsByStatus('pending').subscribe((res: any) => {
      (this.allPosts = res), console.log(res);
    });
  }
+
+
+ view(post:any,content:any){
+  this.postData=post;
+  console.log(post);
+  this.modalService.open(content, { size: 'lg' })
+
+   }
+
 
  //Publish or reject new posts-----------------------------------------------------------------------
  update(id: any, value: string){

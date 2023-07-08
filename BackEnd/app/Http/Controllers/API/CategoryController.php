@@ -53,17 +53,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        // dd($request->all());
         $request->validate([
             'category_name' => 'required|unique:categories,category_name,' . $category->id . '|max:25',
             "cover" => "nullable|image",
         ]);
         if ($request->has('cover')) {
-            // $old_cover = $category->cover;
-            // $cover_path = public_path('categories_images/' . $old_cover);
-            // if (file_exists($cover_path)) {
-            //     unlink($cover_path);
-            // }
+            $old_cover = $category->cover;
+            $cover_path = public_path('categories_images/' . $old_cover);
+            if (file_exists($cover_path)) {
+                unlink($cover_path);
+            }
             $cover = $request->file('cover');
             $cover_name = time() . '_' . $cover->getClientOriginalName();
             $cover->move(public_path('categories_images'), $cover_name);
