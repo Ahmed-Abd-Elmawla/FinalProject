@@ -21,7 +21,6 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { AdminPendingUComponent } from './admin-pending-u/admin-pending-u.component';
 
 
-
 const routes: Routes = [
   {
     path:'Login',
