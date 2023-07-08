@@ -16,6 +16,9 @@ export class Home2detailsComponent implements OnInit {
   propertyItem !: any;
 
 
+
+
+
   constructor(private  activatedRoute: ActivatedRoute,
     private req: CategoriesService,
     private request: PostsService,
