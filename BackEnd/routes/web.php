@@ -44,3 +44,16 @@ Route::get('/categories_images/{filename}', function ($filename) {
     return response()->file($path);
 });
 
+
+//route to get users images
+Route::get('/users_images/{filename}', function ($filename) {
+    $path = storage_path('../public/users_images/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
+    return response()->file($path);
+});
+
+
+
+

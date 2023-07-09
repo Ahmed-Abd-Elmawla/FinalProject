@@ -22,4 +22,16 @@ export class UserService {
   getUserById(id: number) {
     return this.http.get(`http://127.0.0.1:8000/api/users/${id}`);
   }
+
+  deleteUser(id: number){
+    return this.http.delete(`http://localhost:8000/api/users/${id}`);
+}
+
+updateUser(id: number,data:any){
+  return this.http.post(`http://localhost:8000/api/users/update/${id}`,data);
+}
+
+getUsersByStatus(stat:any){
+  return this.http.get(`http://localhost:8000/api/users/status/${stat}`);
+}
 }

@@ -32,8 +32,13 @@ import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { MapComponent } from './map/map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
+import { AdminPendingUComponent } from './admin-pending-u/admin-pending-u.component';
+import { FooterComponent } from './footer/footer.component';
+import { StripeModule } from "stripe-angular";
+import { PaymentFormComponent } from './payment-form/payment-form.component'
+
+
 
 
 @NgModule({
@@ -61,9 +66,11 @@ import { ContactComponent } from './contact/contact.component';
     AdminPendingComponent,
     AdminContactComponent,
     MapComponent,
-    FooterComponent,
     ContactComponent,
-
+    AdminPendingUComponent,
+    FooterComponent,
+    PaymentFormComponent,
+    
   ],
 
   imports: [
@@ -82,6 +89,7 @@ import { ContactComponent } from './contact/contact.component';
     NgxPaginationModule,
     NgbDropdownModule,
     GoogleMapsModule,
+
   ],
   providers: [AdminGuard],
   bootstrap: [AppComponent]

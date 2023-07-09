@@ -1,0 +1,22 @@
+.body{
+  margin-top: 100px;
+  }
+  th{
+    background: linear-gradient(0deg, #0d6efd, #dc3545);
+    color: #FFF;
+  }
+
+.label{
+  width: 110px !important;
+  font-weight: 700;
+}
+.text-center label{
+  font-weight: 700;
+}
+img{
+width: 95% !important;
+}
+
+.col-12{
+padding: 8px !important;
+}
