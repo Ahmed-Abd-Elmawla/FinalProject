@@ -1,13 +1,12 @@
-<div class="container card mt-5">
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label m-2">Comments</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write Your Comment ......." [(ngModel)]="commentText"></textarea>
-      <button class="btn btn-primary mt-2" (click)="addComment(commentText)">Add Comment</button>
+<div class="container card">
+    <div class="mb-3 p-2">
+      <!-- <h2 for="exampleFormControlTextarea1" class="form-label"><p>Reviews</p></h2> -->
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your review ......." [(ngModel)]="commentText"></textarea>
+      <button class="btn btn-primary mt-2 float-end" (click)="addComment(commentText)">Add Review</button>
     </div>
-    <div *ngFor="let comment of comments" class="card m-3">
+    <div *ngFor="let comment of comments">
         <div class="card-body">
           <p class="card-text">{{ comment.comment }}</p>
         </div>
       </div>
   </div>
-  

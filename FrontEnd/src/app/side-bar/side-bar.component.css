@@ -95,3 +95,6 @@ position: absolute;
 .side_bar ul a:hover {
   color: #ffffff;
 }
+ .profile{
+height: 150px !important;
+}

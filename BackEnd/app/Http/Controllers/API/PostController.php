@@ -63,7 +63,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return $post;
+        return $post::with(['user', 'category'])->first();
     }
 
     /**
@@ -179,6 +179,19 @@ class PostController extends Controller
     public function getByStatus($status)
     {
         $posts = Post::with(['user', 'category'])->where('status', $status)->get();
+        return response()->json($posts);
+    }
+
+    public function search($col, $pattern)
+    {
+        $query = Post::with(['user', 'category'])->where(['status'=>'published']);
+
+        $query->where(function($q) use ($col, $pattern) {
+            $q->where($col, 'like', '%'.$pattern.'%');
+        });
+
+        $posts = $query->get();
+
         return response()->json($posts);
     }
 }

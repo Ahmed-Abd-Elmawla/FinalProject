@@ -115,3 +115,44 @@ p{
   height: 100%;
   object-fit: cover;
 }
+
+.review{
+  border: 1px solid #333;
+}
+.review .img-header{
+  width: 200px;
+  height: 200px;
+  ;
+}
+.review .img-header img{
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.img-header{
+width: auto !important;
+height: auto !important;
+}
+
+.review p{
+  font-size: 18px !important;
+  margin-left: 4px;
+  margin-top: 8px !important;
+  }
+  .review h5{
+    margin-left: 4px;
+    margin-top: 0px !important;
+    }
+    .review .contant{
+      margin-top: 0px !important;
+      padding-top: 0px !important;
+    }
+  /* .rev{
+  margin-top: ;
+  } */
+  .review h2{
+    color: #0d6efd !important;
+
+  }

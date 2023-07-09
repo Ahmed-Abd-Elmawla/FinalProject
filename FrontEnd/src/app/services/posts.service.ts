@@ -51,4 +51,9 @@ export class PostsService {
   deletePost(id: any) {
     return this.http.delete(`http://localhost:8000/api/posts/${id}`);
   }
+
+  //search posts
+  search(col:any,pattern:any){
+    return this.http.get(`http://localhost:8000/api/posts/search/${col}/${pattern}`);
+  }
 }

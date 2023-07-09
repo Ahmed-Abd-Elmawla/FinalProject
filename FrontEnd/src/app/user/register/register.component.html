@@ -1,126 +1,141 @@
 <div class="body">
   <div class="overlay"></div>
-	<div class="register-container">
-		<div class="welcome-div">
-			<h1>Welcome to our website!</h1>
-			<p>Join our community and get access to exclusive content.</p>
-		</div>
+  <div class="register-container">
+    <div class="welcome-div">
+      <h1>Welcome to our website!</h1>
+      <p>Join our community and get access to exclusive content.</p>
+    </div>
 
     <div class="form-div">
 
-    <form method="post" class=" form-group" [formGroup]="Register" (ngSubmit)="registerUser()">
-      <div class="form-group">
-      <label for="username" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" formControlName="name" >
-      <span *ngIf="Register.controls['name'].touched && Register.controls['name'].invalid">
+      <form method="post" class=" form-group" [formGroup]="Register" (ngSubmit)="registerUser()">
+        <div class="form-group">
+          <label for="username" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+          <span *ngIf="Register.controls['name'].touched && Register.controls['name'].invalid">
 
-        <span *ngIf="Register.controls['name'].errors?.['required']" class="text-danger">
-                this filed is required
-        </span>
-        <span *ngIf="Register.controls['name'].errors?.['minlength']" class="text-danger">
-            minLength is 5
-         </span>
+            <span *ngIf="Register.controls['name'].errors?.['required']" class="text-danger">
+              this filed is required
+            </span>
+            <span *ngIf="Register.controls['name'].errors?.['minlength']" class="text-danger">
+              minLength is 5
+            </span>
 
-      </span>
-      </div>
-      <div class="form-group">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email"   >
-        <span *ngIf="Register.controls['email'].touched && Register.controls['email'].invalid">
-
-          <span *ngIf="Register.controls['email'].errors?.['required']" class="text-danger">
-                  this filed is required
           </span>
-          <span *ngIf="Register.controls['email'].errors?.['pattern']" class="text-danger">
-             this not valid Email
-           </span>
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+          <span *ngIf="Register.controls['email'].touched && Register.controls['email'].invalid">
 
-      </span>
-      </div>
-      <div class="form-group">
-      <label class="form-label"> Phone Number </label>
+            <span *ngIf="Register.controls['email'].errors?.['required']" class="text-danger">
+              this filed is required
+            </span>
+            <span *ngIf="Register.controls['email'].errors?.['pattern']" class="text-danger">
+              this not valid Email
+            </span>
 
-        <input type="number" class="form-control" formControlName="number">
-        <span *ngIf="Register.controls['number'].touched && Register.controls['number'].invalid">
-
-          <span *ngIf="Register.controls['number'].errors?.['required']" class="text-danger">
-                  this filed is required
           </span>
-          <span *ngIf="Register.controls['number'].errors?.['minlength']" class="text-danger">
+        </div>
+        <div class="form-group">
+          <label class="form-label"> Phone Number </label>
+
+          <input type="number" class="form-control" formControlName="number">
+          <span *ngIf="Register.controls['number'].touched && Register.controls['number'].invalid">
+
+            <span *ngIf="Register.controls['number'].errors?.['required']" class="text-danger">
+              this filed is required
+            </span>
+            <span *ngIf="Register.controls['number'].errors?.['minlength']" class="text-danger">
               minLength is 10
-           </span>
+            </span>
 
-      </span>
-      </div>
-      <div class="form-group ">
-        <label  class="form-label"> Personal ID </label>
+          </span>
+        </div>
+        <div class="form-group ">
+          <label class="form-label"> Personal ID </label>
 
           <input type="number" class="form-control" formControlName="id">
           <span *ngIf="Register.controls['id'].touched && Register.controls['id'].invalid">
 
             <span *ngIf="Register.controls['id'].errors?.['required']" class="text-danger">
-                    this filed is required
+              this filed is required
             </span>
             <span *ngIf="Register.controls['id'].errors?.['minlength']" class="text-danger">
-                minLength is 14
-             </span>
+              minLength is 14
+            </span>
 
-        </span>
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+
+          <span *ngIf="Register.controls['password'].touched && Register.controls['password'].invalid">
+
+            <span *ngIf="Register.controls['password'].errors?.['required']" class="text-danger">
+              this filed is required
+            </span>
+            <span *ngIf="Register.controls['password'].errors?.['minlength']" class="text-danger">
+              minLength is 8 chars
+
+            </span>
+
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="password" formControlName="confirmpassword">
+
+          <span *ngIf="Register.controls['confirmpassword'].touched && Register.controls['confirmpassword'].invalid">
+
+            <span *ngIf="Register.controls['confirmpassword'].errors?.['required']" class="text-danger">
+              this filed is required
+            </span>
+
+
+          </span>
+
+          <span *ngIf="Register.controls['confirmpassword'].touched ">
+
+
+            <span *ngIf="Register.controls['confirmpassword'].value != Register.controls['password'].value"
+              class="text-danger">
+              passwords not the same ...
+            </span>
+          </span>
+        </div>
+
+        <div class="form-group ">
+          <label class="form-label">Identity Images </label>
+
+          <input id="images" type="file" class="form-control" name="images[]" multiple formControlName="image">
+
+          <span *ngIf="Register.controls['image'].touched && Register.controls['image'].invalid">
+
+            <span class="d-block text-danger" *ngIf="Register.controls['image'].errors?.['required']">Images are required</span>
+          <span class="d-block text-danger" *ngIf="Register.controls['image'].errors?.['fileCount']">Please upload 2 images front and back of your id</span>
+
+          </span>
+
         </div>
         <div class="form-group ">
-          <label  class="form-label"> Image With Your ID </label>
+          <label class="form-label">Profile Image</label>
 
-            <input type="file" class="form-control" formControlName="image" (change)="uploadImage($event)">
+          <input id="cover" type="file" class="form-control" formControlName="cover">
 
-            <span *ngIf="Register.controls['image'].touched && Register.controls['image'].invalid">
+          <span *ngIf="Register.controls['cover'].touched && Register.controls['cover'].invalid">
 
-              <span *ngIf="Register.controls['image'].errors?.['required']" class="text-danger">
-                      this filed is required
-              </span>
+            <span class="d-block text-danger" *ngIf="Register.controls['cover'].errors?.['required']">Profile image required</span>
+          <span class="d-block text-danger" *ngIf="Register.controls['cover'].errors?.['fileCount']">Please upload image</span>
 
           </span>
 
         </div>
-      <div class="form-group">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" formControlName="password"  >
 
-        <span *ngIf="Register.controls['password'].touched && Register.controls['password'].invalid">
-
-          <span *ngIf="Register.controls['password'].errors?.['required']" class="text-danger">
-                  this filed is required
-          </span>
-          <span *ngIf="Register.controls['password'].errors?.['minlength']" class="text-danger">
-             minLength is 8 chars
-
-           </span>
-
-       </span>
-      </div>
-      <div class="form-group">
-        <label for="password" class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" id="password" formControlName="confirmpassword"   >
-
-        <span *ngIf="Register.controls['confirmpassword'].touched && Register.controls['confirmpassword'].invalid">
-
-          <span *ngIf="Register.controls['confirmpassword'].errors?.['required']" class="text-danger">
-                  this filed is required
-          </span>
-
-
-       </span>
-
-       <span *ngIf="Register.controls['confirmpassword'].touched ">
-
-
-        <span *ngIf="Register.controls['confirmpassword'].value != Register.controls['password'].value" class="text-danger">
-          passwords not the same ...
-         </span>
-     </span>
-      </div>
-        <button type="submit"  class="btn btn-register btn-block" [disabled]="Register.invalid">Register</button>
+        <button type="submit" class="btn btn-register btn-block" [disabled]="Register.invalid">Register</button>
       </form>
-</div>
+    </div>
 
- </div>
-
+  </div>

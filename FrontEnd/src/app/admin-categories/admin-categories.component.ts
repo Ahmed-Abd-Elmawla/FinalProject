@@ -15,29 +15,27 @@ import { CategoriesService } from '../services/categories.service';
   styleUrls: ['./admin-categories.component.css'],
 })
 export class AdminCategoriesComponent {
-   //global variables ---------------------------------------------------------------------------------
+  //global variables -----------------------------------------------------------------------------------
   flag = true;
   form!: FormGroup;
-  categories!:any;
+  categories!: any;
   category_name!: any;
   category_id!: number;
-  cover!:any;
+  cover!: any;
 
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private req:CategoriesService
+    private req: CategoriesService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
   ngOnInit() {
-    this.req.getAllCategories().subscribe((res: any) => {
-      (this.categories = res);
-    });
-    //create validation for form--------------------------------------------------------
+    this.fetchData();
+    //create validation for form-------------------------------------------------------------------------
     this.form = this.fb.group({
       category: new FormControl(null, [
         Validators.required,
@@ -51,42 +49,51 @@ export class AdminCategoriesComponent {
       control.markAsTouched();
     });
   }
+
+  //get data from Api-------------------------------------------------------------------------------------
+  fetchData() {
+    this.req.getAllCategories().subscribe((res: any) => {
+      this.categories = res;
+    });
+  }
+
+  //open create form--------------------------------------------------------------------------------------
   open(content: any) {
     this.category_name = null;
     this.modalService.open(content, { centered: true });
   }
 
-  openUpdate(content: any, name: string,id:number) {
+  //open update form--------------------------------------------------------------------------------------
+  openUpdate(content: any, name: string, id: number) {
     this.flag = false;
     this.category_name = name;
-    this.category_id=id;
-
+    this.category_id = id;
     this.modalService.open(content, { centered: true });
   }
+
   //create new category-----------------------------------------------------------------------------------
   create() {
     const data = new FormData();
     const input = document.querySelector('input[type="file"]');
     if (input instanceof HTMLInputElement && input.files) {
       const files = input.files;
-      if(files.length>0){
+      if (files.length > 0) {
         data.append('cover', files[0], files[0].name);
-    }}
-    data.set("category_name",this.category_name);
+      }
+    }
+    data.set('category_name', this.category_name);
 
     this.req.createCategory(data).subscribe(
       (res) => {
         {
+          this.modalService.dismissAll();
+          this.fetchData();
           Swal.fire({
             position: 'center',
             icon: 'success',
             title: 'Your category has been created.',
             showConfirmButton: false,
             timer: 3000,
-          }).then(() => {
-            setTimeout(() => {
-              window.location.reload();
-            }, 0);
           });
         }
       },
@@ -108,37 +115,36 @@ export class AdminCategoriesComponent {
     const input = document.querySelector('input[type="file"]');
     if (input instanceof HTMLInputElement && input.files) {
       const files = input.files;
-      if(files.length>0){
+      if (files.length > 0) {
         data.append('cover', files[0], files[0].name);
-    }}
-    data.set("_method",'PUT');
-    data.set("category_name",this.category_name);
-        this.req.updateCategory(this.category_id,data).subscribe(
-          (res) => {
-            {
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Your category has been updated.',
-                showConfirmButton: false,
-                timer: 3000,
-              }).then(() => {
-                setTimeout(() => {
-                  window.location.reload();
-                }, 0);
-              });
-            }
-          },
-          (err) => {
-            if (err)
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: err.error.message,
-              }),
-                console.error(err);
-          }
-        );
+      }
+    }
+    data.set('_method', 'PUT');
+    data.set('category_name', this.category_name);
+    this.req.updateCategory(this.category_id, data).subscribe(
+      (res) => {
+        {
+          this.modalService.dismissAll();
+          this.fetchData();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your category has been updated.',
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
+      },
+      (err) => {
+        if (err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.error.message,
+          }),
+            console.error(err);
+      }
+    );
   }
 
   //delete category---------------------------------------------------------------------------------------
@@ -155,16 +161,14 @@ export class AdminCategoriesComponent {
       if (result.isConfirmed) {
         this.req.deleteCategory(id).subscribe(
           (res) => {
+            this.modalService.dismissAll();
+            this.fetchData();
             Swal.fire({
               position: 'center',
               icon: 'success',
               title: 'Your category has been deleted.',
               showConfirmButton: false,
               timer: 3000,
-            }).then(() => {
-              setTimeout(() => {
-                window.location.reload();
-              }, 0);
             });
           },
           (err) => {
@@ -180,5 +184,4 @@ export class AdminCategoriesComponent {
       }
     });
   }
-
 }

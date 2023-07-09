@@ -5,7 +5,9 @@
         <img class="img-fluid" src="http://localhost:8000/post_images/{{propertyItem.images[0]}}" alt="">
       </div>
 
-   
+      <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 category">
+        {{ propertyItem.category.category_name }}
+      </div>
     </div>
     <div class="p-4 pb-0 down">
         <h5 class="text-primary mb-3">${{propertyItem.price}}</h5>

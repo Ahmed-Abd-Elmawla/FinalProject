@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommentsService } from '../services/comments.service';
 import { Comment } from '../Model/comment';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-comments',
@@ -9,6 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent {
+  @Input() propertyItem!: any;
   commentText: string = '';
   comments: Comment[] = []; // Array to store comments
   commentSubscription: Subscription | undefined;
@@ -17,10 +19,10 @@ export class CommentsComponent {
 
   addComment(commentText: string): void {
     const newComment: Comment = {
-      id: 0, 
-      user_id: 0, 
+      id: 0,
+      user_id: this.propertyItem.user_id,
       owner_id: 0,
-      post_id: 0, 
+      post_id: this.propertyItem.id,
       comment: commentText,
       created_at: '',
       updated_at: ''
@@ -29,9 +31,20 @@ export class CommentsComponent {
     this.commentSubscription = this.commentsService.addComment(newComment).subscribe({
       next: (comment: Comment) => {
         // Handle successful comment creation
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'review has been added.',
+          showConfirmButton: false,
+          timer: 3000,
+        }).then(() => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 0);
+        });
         console.log('Comment added:', comment);
-        this.comments.push(comment); // Add the new comment to the comments array
-        this.commentText = ''; // Clear the textarea
+        // this.comments.push(comment); // Add the new comment to the comments array
+        // this.commentText = ''; // Clear the textarea
       },
       error: (error: any) => {
         // Handle error in comment creation
