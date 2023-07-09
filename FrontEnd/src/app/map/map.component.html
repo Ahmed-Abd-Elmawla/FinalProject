@@ -1,0 +1,36 @@
+
+<div class="map-page">
+  <div class="wrapper">
+    <!-- <div class="input">
+      <app-places-autocompelete></app-places-autocompelete>
+    </div> -->
+
+    <div class="dropdonw-wrapper">
+      <button class="button btn" (click)="handlebuttonclick()">
+        select city
+      </button>
+      <ul class="list" *ngIf="showDropdown">
+        <li *ngFor="let city of cities">
+          <button (click)="handleCityClick(city.coords)">
+            {{ city.name }}
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <div *ngIf="apiLoaded | async"> -->
+    <google-map
+      [center]="center"
+      [zoom]="zoom"
+      (mapClick)="mapClick($event)"
+      class="map"
+    >
+      <map-marker
+        *ngFor="let markerPosition of markerPositions"
+        [position]="markerPosition"
+        [options]="markerOptions"
+      ></map-marker>
+    </google-map>
+    <!-- </div> -->
+  </div>
+</div>

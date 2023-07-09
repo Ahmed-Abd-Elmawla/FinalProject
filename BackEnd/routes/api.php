@@ -49,7 +49,7 @@ Route::get('/posts/category/{category_id}', [\App\Http\Controllers\API\PostContr
 Route::post('/posts/status/{post}', [\App\Http\Controllers\API\PostController::class, 'updateStatus']);
 Route::get('/posts/status/{status}', [\App\Http\Controllers\API\PostController::class, 'getByStatus']);
 
-
+Route::apiResource('locations',\App\Http\Controllers\LocationController::class);
 
 Route::apiResource('premiums',\App\Http\Controllers\PremiumController::class);
 
