@@ -33,6 +33,7 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { MapComponent } from './map/map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { FooterComponent } from './footer/footer.component';
     AdminContactComponent,
     MapComponent,
     FooterComponent,
+    ContactComponent,
 
   ],
 

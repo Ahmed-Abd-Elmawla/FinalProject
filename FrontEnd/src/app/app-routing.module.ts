@@ -19,6 +19,7 @@ import { AdminPendingComponent } from './admin-pending/admin-pending.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { MapComponent } from './map/map.component';
+import {ContactComponent} from './contact/contact.component';
 
 
 const routes: Routes = [
@@ -99,6 +100,10 @@ const routes: Routes = [
   {
     path: 'map',
     component: MapComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
   },
 ];
 
