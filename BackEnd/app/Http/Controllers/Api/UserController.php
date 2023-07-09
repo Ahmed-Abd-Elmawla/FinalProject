@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,20 +21,21 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
+        // $validator = Validator::make($request->all(), [
+            $request->validate([
             'name' => 'required|string|min:15|max:255',
             'number' => 'required|unique:users|min:11|max:11',
             'id' => 'required|unique:users|min:14|max:14',
             "images" => "required|array|min:2|max:2",
             "images.*" => "required|image",
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required',
+            'password' => 'required|min:8',
             "cover" => "required|image",
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json(['errors' => $validator->errors()], 422);
+        // }
         $images = [];
         if ($request->has('images')) {
             $files = $request->file('images');
@@ -185,7 +188,7 @@ class UserController extends Controller
         }
 
         $user->update([
-            'name' => $request->name,
+            'code' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -197,5 +200,49 @@ class UserController extends Controller
     {
         $users = User::where(['status'=>$status])->get();
         return response()->json($users);
+    }
+
+    public function searchByMail($email)
+    {
+        $user = User::where(['email'=>$email])->first();
+        if($user){
+            $code = str_pad(mt_rand(111111, 999999), 6, '0', STR_PAD_LEFT);
+            $user->code = $code;
+            try {
+                $user->save();
+            } catch (\Exception $e) {
+                return response()->json(['message' =>false, 'error' => $e->getMessage()]);
+            }
+            $data['subject']='Verification Code';
+            $data['title']=$code;
+            $data['message']='this yor Verification code';
+            Mail::to($email)->send(new ContactMail($data));
+            return response()->json(['message' =>true]);
+        }else{
+            return response()->json(['message' =>false]);
+        }
+    }
+
+    public function checkCode($email,$code)
+    {
+        $user = User::where(['email'=>$email])->first();
+        if($user->code==$code){
+            return response()->json(['message' =>true]);
+        }else{
+            return response()->json(['message' =>false]);
+        }
+    }
+
+    public function resetPassword(Request $request,$email)
+    {
+        $request->validate([
+            'password' => 'required|min:8',
+        ]);
+        $user = User::where(['email'=>$email])->first();
+        $user->code = null;
+        $user->password=Hash::make($request->password);
+        $user->save();
+        return response()->json(['message' =>'password updated successfully.']);
+
     }
 }

@@ -82,6 +82,7 @@
 	color: #034771;
 	font-weight: bold;
 	text-decoration: none;
+  cursor: pointer;
 }
 
 .card-footer p a:hover {

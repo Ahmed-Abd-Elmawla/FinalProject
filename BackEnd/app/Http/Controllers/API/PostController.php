@@ -181,4 +181,17 @@ class PostController extends Controller
         $posts = Post::with(['user', 'category'])->where('status', $status)->get();
         return response()->json($posts);
     }
+
+    public function search($col, $pattern)
+    {
+        $query = Post::with(['user', 'category'])->where(['status'=>'published']);
+
+        $query->where(function($q) use ($col, $pattern) {
+            $q->where($col, 'like', '%'.$pattern.'%');
+        });
+
+        $posts = $query->get();
+
+        return response()->json($posts);
+    }
 }

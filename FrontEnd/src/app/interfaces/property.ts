@@ -6,5 +6,5 @@ export interface Property {
   discount:number;
   location:string;
   images:any[];
-
+  category:any;
 }

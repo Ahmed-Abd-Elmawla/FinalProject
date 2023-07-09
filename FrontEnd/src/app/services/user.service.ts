@@ -34,4 +34,16 @@ updateUser(id: number,data:any){
 getUsersByStatus(stat:any){
   return this.http.get(`http://localhost:8000/api/users/status/${stat}`);
 }
+
+findUser(email:any){
+  return this.http.get(`http://localhost:8000/api/users/find/${email}`);
+}
+
+checkCode(email:any,code:number){
+  return this.http.get(`http://localhost:8000/api/users/check/${email}/${code}`);
+}
+
+reset(email:any,pass:any){
+  return this.http.post(`http://localhost:8000/api/users/reset/${email}`,pass);
+}
 }

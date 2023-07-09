@@ -30,6 +30,10 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
      "enableIvy": false
-  },
+  },"paths": {
+    "stripe-angular": [
+      "node_modules/stripe-angular"
+    ]
+  }
 
 }
