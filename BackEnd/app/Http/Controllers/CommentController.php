@@ -48,4 +48,10 @@ class CommentController extends Controller
         $comment->delete();
         return response()->json(null, 204);
     }
+
+    public function getByPostId($post_id)
+    {
+        return Comment::with(['user'])->where('post_id', $post_id)->get();
+    }
 }
+

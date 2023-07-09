@@ -63,7 +63,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return $post;
+        return $post::with(['user', 'category'])->first();
     }
 
     /**

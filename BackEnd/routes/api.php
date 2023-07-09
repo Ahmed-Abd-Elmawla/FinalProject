@@ -45,6 +45,7 @@ Route::post('comments', [CommentController::class, 'store']);
 Route::get('comments/{comment}', [CommentController::class, 'show']);
 Route::put('comments/{comment}', [CommentController::class, 'update']);
 Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
+Route::get('comments/post/{post_id}', [CommentController::class, 'getByPostId']);
 
 //Posts Api's-----------------------------------------------------------------------------------------------------
 Route::apiResource('posts',\App\Http\Controllers\API\PostController::class);

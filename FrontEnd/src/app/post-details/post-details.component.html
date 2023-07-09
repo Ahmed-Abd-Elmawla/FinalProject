@@ -1,9 +1,8 @@
 <div class="body">
-
 <div class="container">
   <div class="post-details">
     <div class="rows ">
-
+      <p class="post-title text-center"> <b>{{propertyItem.title}}</b> </p>
       <div class="imag">
         <div id="carouselExampleRide" class="carousel slide show" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -26,15 +25,53 @@
 
     </div>
     <div class="row">
-      <div class="col-12">
+      <!-- <div class="col-12">
         <p class="post-title"> <b>Title :</b> {{propertyItem.title}}</p>
         <p class="post-price"><b> Price :</b> {{propertyItem.price}} EGP</p>
         <p class="post-description"><b class="post-price">Description :</b> {{propertyItem.description}}</p>
         <p class="post-location"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{propertyItem.location}}</p>
+      </div> -->
+
+      <div class="col-4 text-center mt-3"><b class="post-price">Price</b></div>
+      <div class="col-8 mt-3">
+        {{propertyItem.price}} EGP
+      </div>
+
+      <div class="col-4  text-center mt-3"><b class="post-price">Description</b></div>
+      <div class="col-8 mt-3">
+        {{propertyItem.description}}
+      </div>
+
+      <div class="col-4  text-center mt-3"><b class="post-price">location</b></div>
+      <div class="col-8 mt-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{propertyItem.location}}</div>
+
+      <div class="col-4  text-center mt-3"></div>
+      <div class="col-8 mt-3">
+        <div> <label class="labl mx-2" for="">Genres </label><a class="cat" href="/home2card-details/{{propertyItem.category.id}}">{{propertyItem.category.category_name}}</a></div>
+        <div class="review mt-5">
+          <h2 class="pt-4 ps-4 pb-4 text-danger">Reviews</h2>
+          <div class="row ps-3 px-3" *ngFor="let review of reviews">
+            <div class="colm d-flex" *ngIf="review.review !='' ">
+              <div class="img-header">
+                <img src="http://localhost:8000/users_images/{{ review.user.cover }}" alt="">
+              </div>
+              <div class="rev mt-2">
+                <h5>{{review.user.name}}</h5>
+                <!-- <ngb-rating class="rate" [rate]=review.rate></ngb-rating> -->
+
+                <div class="text-secondary">
+                  <p>{{review.comment}}</p>
+                </div>
+              </div>
+            </div>
+            <hr class="mb-2">
+          </div>
+                    <app-comments [propertyItem]="propertyItem"></app-comments>
+        </div>
       </div>
     </div>
   </div>
 </div>
 </div>
-<!-- <app-carousel [images]="propertyItem.images"></app-carousel> -->
-<!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> -->
+
+

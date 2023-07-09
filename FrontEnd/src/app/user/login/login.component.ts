@@ -37,15 +37,22 @@ export class LoginComponent {
       ],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
-//------------------------------------------------------------
+    //------------------------------------------------------------
     this.resetForm = this.fbuilder.group({
-      pass: ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]+$/)]],
+      pass: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]+$/),
+        ],
+      ],
       confirmPass: ['', [Validators.required]],
     });
-        //make all input fields touched to show errors after the form load
-        Object.values(this.resetForm.controls).forEach((control) => {
-          control.markAsTouched();
-        });
+    //make all input fields touched to show errors after the form load
+    Object.values(this.resetForm.controls).forEach((control) => {
+      control.markAsTouched();
+    });
   }
 
   userLogin() {
@@ -104,6 +111,7 @@ export class LoginComponent {
             } else {
               sessionStorage.setItem('email', email);
               Swal.close();
+              this.modalService.dismissAll();
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -139,6 +147,7 @@ export class LoginComponent {
         if (res.message == false) {
           Swal.fire('invalid code', '', 'error');
         } else {
+          this.modalService.dismissAll();
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -164,13 +173,12 @@ export class LoginComponent {
     );
   }
 
-
-  resetPassword(pass:any){
+  resetPassword(pass: any) {
     const email = sessionStorage.getItem('email');
-    const data={
-      password:pass
-    }
-    this.userserv.reset(email,data).subscribe(
+    const data = {
+      password: pass,
+    };
+    this.userserv.reset(email, data).subscribe(
       (res) => {
         sessionStorage.removeItem('email');
         Swal.fire({
