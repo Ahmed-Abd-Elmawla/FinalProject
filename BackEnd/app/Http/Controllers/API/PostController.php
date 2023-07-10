@@ -61,9 +61,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($post)
     {
-        return $post::with(['user', 'category'])->first();
+        $post_ = Post::with(['user', 'category'])->where(['id'=> $post,'status'=>'published'])->get();
+        return $post_;
     }
 
     /**

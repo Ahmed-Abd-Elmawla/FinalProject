@@ -1,0 +1,33 @@
+.body{
+  margin-top: 100px;
+  }
+  th{
+    background: linear-gradient(0deg, #0d6efd, #dc3545);
+    color: #FFF;
+  }
+
+  .btn-outline-success {
+    border-color: #0d6efd;
+    color: #fff;
+    background: linear-gradient(45deg, #0d6efd, #dc3545);
+    transition: 0.3s ease-in-out;
+  }
+
+  .btn-outline-success:hover {
+    border-color: #0d6efd;
+    color: #dc3545;
+    background: #fff;
+  }
+
+  form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .msg{
+    width: 100% !important;
+    height: 200px !important;
+    word-wrap: break-word;
+    font-weight: 500;
+    font-size: 20px;
+  }

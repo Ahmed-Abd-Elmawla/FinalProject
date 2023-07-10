@@ -20,11 +20,16 @@
       <li *ngIf="user.role_id==1"><a [routerLink]="['/AdminPendingPosts']" routerLinkActive="router-link-active"><i
             class="fa-solid fa-thumbtack"></i>Pending Posts</a>
       </li>
+      <li *ngIf="user.role_id==1"><a [routerLink]="['/AdminPromote']" routerLinkActive="router-link-active"><i
+        class="fa-solid fa-thumbtack"></i>Pending Promotion</a>
+      </li>
       <li *ngIf="user.role_id==1"><a [routerLink]="['/AdminCategories']" routerLinkActive="router-link-active"><i
             class="fa-solid fa-tag"></i>Categories</a></li>
       <li *ngIf="user.role_id==1"><a [routerLink]="['/AdminContacts']" routerLinkActive="router-link-active"><i
             class="fa-solid fa-envelope-circle-check"></i>Messages</a>
       </li>
+      <li *ngIf="user.role_id==1"><a [routerLink]="['/AdminReviews']" routerLinkActive="router-link-active"><i class="fa-solid fa-comments"></i>Reviews</a>
+  </li>
     </ul>
   </div>
 </div>

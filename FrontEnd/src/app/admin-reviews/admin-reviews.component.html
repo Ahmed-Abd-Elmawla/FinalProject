@@ -1,0 +1,53 @@
+<div class="body">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <app-side-bar></app-side-bar>
+      </div>
+      <div class="col-9">
+        <div class="row mb-3">
+          <div class="col p-0 ps-1">
+            <h3 class="d-inline">Reviews</h3>
+          </div>
+        </div>
+        <div class="row p-0 ps-1">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Review</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="align-middle" *ngFor="let review of reviews;let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{review.user.name}}</td>
+                <td>
+                  <button class="btn btn-info" placement="bottom" ngbTooltip="view review"
+                    (click)="view(messageModel,review.user.name,review.comment)"><i
+                      class="fa-solid fa-eye"></i></button>
+                </td>
+                <td>
+                  <a class="btn btn-danger ms-2" (click)="delete(review.id)" placement="bottom" ngbTooltip="Delete review"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #messageModel let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{name_}}'s review</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="msg"> <p>{{review_}}</p></div>
+  </div>
+</ng-template>

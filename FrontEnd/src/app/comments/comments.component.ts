@@ -14,13 +14,15 @@ export class CommentsComponent {
   commentText: string = '';
   comments: Comment[] = []; // Array to store comments
   commentSubscription: Subscription | undefined;
-
-  constructor(private commentsService: CommentsService) { }
+  dataStored!: any;
+  constructor(private commentsService: CommentsService) {
+    this.dataStored = JSON.parse(localStorage.getItem('user')||'{}') ;
+  }
 
   addComment(commentText: string): void {
     const newComment: Comment = {
       id: 0,
-      user_id: this.propertyItem.user_id,
+      user_id: this.dataStored.id,
       owner_id: 0,
       post_id: this.propertyItem.id,
       comment: commentText,

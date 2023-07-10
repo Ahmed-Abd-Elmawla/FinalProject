@@ -21,6 +21,8 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { MapComponent } from './map/map.component';
 import {ContactComponent} from './contact/contact.component';
 import { AdminPendingUComponent } from './admin-pending-u/admin-pending-u.component';
+import { AdminReviewsComponent } from './admin-reviews/admin-reviews.component';
+import { AdminPromoteComponent } from './admin-promote/admin-promote.component';
 
 
 
@@ -68,6 +70,16 @@ const routes: Routes = [
   {
     path: 'AdminContacts',
     component: AdminContactComponent,
+    canActivate:[AdminGuard],
+  },
+  {
+    path: 'AdminReviews',
+    component: AdminReviewsComponent,
+    canActivate:[AdminGuard],
+  },
+  {
+    path: 'AdminPromote',
+    component: AdminPromoteComponent,
     canActivate:[AdminGuard],
   },
   {

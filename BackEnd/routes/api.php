@@ -66,6 +66,9 @@ Route::apiResource('categories',\App\Http\Controllers\API\CategoryController::cl
 
 //Rate
  Route::apiResource('rate', NewRateController::class);
+ Route::get('rate/{post_id}/{user_id}', [NewRateController::class,'getUserRate']);
+ Route::get('rates/{post_id}', [NewRateController::class,'getPostRate']);
+
 // Route::get('/rate',[\App\Http\Controllers\API\NewRateController::class,'index']);
 
 //Chat Api's-----------------------------------------------------------------------------------------------------------

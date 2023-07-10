@@ -24,7 +24,7 @@ class UserController extends Controller
         // $validator = Validator::make($request->all(), [
             $request->validate([
             'name' => 'required|string|min:15|max:255',
-            'number' => 'required|unique:users|min:11|max:11',
+            'number' => 'required|unique:users|min:10|max:11',
             'id' => 'required|unique:users|min:14|max:14',
             "images" => "required|array|min:2|max:2",
             "images.*" => "required|image",

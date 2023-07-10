@@ -74,7 +74,6 @@ export class LoginComponent {
       } else {
         localStorage.setItem('user', JSON.stringify(result));
         Swal.fire({
-          position: 'top-end',
           icon: 'success',
           title: 'Logged in successfully',
           showConfirmButton: false,

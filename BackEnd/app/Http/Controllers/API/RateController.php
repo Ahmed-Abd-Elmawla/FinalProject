@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Rate;
 class RateController extends Controller
 {
     /**
@@ -30,6 +30,7 @@ class RateController extends Controller
         $rate->rate_value = $request->input('rate_value');
         $rate->user_id = $request->input('user_id');
         $rate->owner_id = $request->input('owner_id');
+        $rate->post_id = $request->input('post_id');
         $rate->save();
 
         return response()->json(['message' => 'Rate created successfully']);
@@ -58,5 +59,16 @@ class RateController extends Controller
     {
         $rate->delete();
         return response()->json(null, 204);
+    }
+
+    public function getUserRate($post_id,$user_id)
+    {
+        $rate = Rate::where(['post_id'=> $post_id,'user_id'=>$user_id])->get();
+        return response()->json($rate);
+    }
+    public function getPostRates($post_id)
+    {
+        $rate = Rate::where(['post_id'=> $post_id])->get();
+        return response()->json($rate);
     }
 }
