@@ -156,3 +156,23 @@ height: auto !important;
     color: #0d6efd !important;
 
   }
+
+
+  .labl{
+    color:  #6c757d !important;
+  }
+
+  .cat{
+    font-size: 15px !important;
+    display: inline !important;
+    text-decoration: none;
+  }
+
+  ngb-rating{
+    font-size: 25px;
+    color: darkorange;
+  }
+  
+.rate{
+  font-size: 18px;
+}

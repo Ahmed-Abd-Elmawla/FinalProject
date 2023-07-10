@@ -36,7 +36,11 @@ import { ContactComponent } from './contact/contact.component';
 import { AdminPendingUComponent } from './admin-pending-u/admin-pending-u.component';
 import { FooterComponent } from './footer/footer.component';
 import { StripeModule } from "stripe-angular";
-import { PaymentFormComponent } from './payment-form/payment-form.component'
+import { PaymentFormComponent } from './payment-form/payment-form.component';
+import { AdminReviewsComponent } from './admin-reviews/admin-reviews.component'
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminPromoteComponent } from './admin-promote/admin-promote.component';
+
 
 
 
@@ -70,7 +74,9 @@ import { PaymentFormComponent } from './payment-form/payment-form.component'
     AdminPendingUComponent,
     FooterComponent,
     PaymentFormComponent,
-    
+    AdminReviewsComponent,
+    AdminPromoteComponent,
+
   ],
 
   imports: [
@@ -89,6 +95,7 @@ import { PaymentFormComponent } from './payment-form/payment-form.component'
     NgxPaginationModule,
     NgbDropdownModule,
     GoogleMapsModule,
+    NgbRatingModule
 
   ],
   providers: [AdminGuard],

@@ -62,6 +62,7 @@
                         </div>
                       </div>
                       <div class="text-center">
+                        <a class="btn btn-outline-success m-2" *ngIf="post.status != 'pending'&&post.status != 'rejected'" (click)="pay(2)">promote it</a>
                         <a class="btn btn-outline-primary m-2" *ngIf="post.status != 'pending' &&post.status != 'rejected'"
                           (click)="openUpdate(content,post.id,post.title,post.description,post.price,post.discount,post.location,post.category_id,post.status)">update</a>
                         <a class="btn btn-outline-danger m-2" *ngIf="post.status != 'pending'" (click)="delete(post.id)">delete</a>

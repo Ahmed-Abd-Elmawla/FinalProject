@@ -25,7 +25,7 @@ class PremiumController extends Controller
     {
        $data = $request->validate([
             'post_id' => 'required|exists:posts,id',
-            'expire_date' => 'required|date'
+            // 'expire_date' => 'required|date'
         ]);
 
 

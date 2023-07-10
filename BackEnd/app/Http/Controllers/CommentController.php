@@ -12,7 +12,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return Comment::all();
+        return Comment::with('user')->get();
     }
 
     /**

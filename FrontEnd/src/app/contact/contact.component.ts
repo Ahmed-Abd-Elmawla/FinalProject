@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -41,7 +42,14 @@ onSubmit() {
     this.http.post('http://127.0.0.1:8000/api/contacts', this.contactForm.value).subscribe({
       next: (response) => {
         console.log(response);
-        alert('Message sent successfully!');
+        // alert('Message sent successfully!');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Message sent successfully!',
+          showConfirmButton: false,
+          timer: 3000,
+        })
         this.contactForm.reset();
       },
       error: (error) => {
