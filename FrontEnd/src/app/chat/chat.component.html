@@ -1,12 +1,13 @@
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3 m-3 card shadow" style="background-color: rgba(152, 191, 228, 0.705);">
       <h2 class="mt-2 text-primary">Users</h2>
-      <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3 lh-tight">
+
         <ng-container *ngFor="let user of users">
+
+          <a href="javascript:void(0)"(click)="selectUser(user)" class="list-group-item list-group-item-action py-1 lh-tight">
           <div *ngIf="user.id !== currentUserId"
-          (click)="selectUser(user)"
+
           [class.hoverable-item]="true"
           [class.selected]="user.id === (selectedUser?.id || null)"
           [attr.data-user-id]="user.id">
@@ -18,14 +19,17 @@
               </small>
             </div>
             <p>{{ user.email }}</p>
+
           </div>
           <hr>
+        </a>
+
         </ng-container>
-      </a>
-      
-      
+
+
+
     </div>
-    
+
     <div class="col-md-8">
       <div class="container card mt-3 shadow" style="background-color: rgba(152, 191, 228, 0.705);">
         <h2 style="color: black;"><img [src]="logoUrl" style="height: 5rem; width: 5rem;"><span class="text-primary" style="font-family: 'Great Vibes', cursive;font-family: 'Lobster', cursive;">{{username}}</span> Chat</h2>
@@ -39,8 +43,8 @@
             </ng-container>
           </div>
         </div>
-        
-       
+
+
         <form (submit)="submit()" class="d-flex chat-input">
           <input type="text" placeholder="Type a message..." class="form-control m-2" [(ngModel)]="message" [ngModelOptions]="{ standalone: true }">
 
@@ -52,14 +56,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-

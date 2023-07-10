@@ -19,16 +19,16 @@ class ChatController extends Controller
             'receiver_id' => $request->input('receiver_id'),
             'message' => $request->input('message'),
         ]);
-        
+
 
         event(new NewChatMessage($message));
 
         return new Response(['success' => true], 200, [
             'Content-Type' => 'multipart/form-data',
         ]);
-    }   
-    
- 
+    }
+
+
 public function getMessages($senderId, $receiverId)
 {
     $messages = Message::where('sender_id', $senderId)
@@ -39,4 +39,3 @@ public function getMessages($senderId, $receiverId)
 }
 
 }
-
