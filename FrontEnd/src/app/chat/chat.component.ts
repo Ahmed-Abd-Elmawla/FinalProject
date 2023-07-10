@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { UserService } from '../services/user.service';
@@ -25,9 +24,9 @@ export class ChatComponent implements OnInit {
   username: string = '';
   users: any[] = [];
   selectedUser: any;
-  currentUserId!: number ; 
- 
- 
+  currentUserId!: number ;
+
+
   constructor(
     private chatService: ChatService,
     private userService: UserService,
@@ -41,37 +40,37 @@ export class ChatComponent implements OnInit {
       this.username = this.authUser.name;
       this.currentUserId = this.authUser.id;
     }
-    
+
     const storedMessages = localStorage.getItem('messages');
     if (storedMessages) {
       this.messages = JSON.parse(storedMessages);
     }
-  
+
     const selectedUser = localStorage.getItem('selectedUser');
     if (selectedUser) {
       this.selectedUser = JSON.parse(selectedUser);
     }
-  
+
     Pusher.logToConsole = true;
-  
+
     const pusher = new Pusher('e41f286dcd02aa5445fe', {
       cluster: 'eu'
     });
-  
+
     const channel = pusher.subscribe('chat');
     channel.bind('NewChatMessage', (data: { message: string, sender_id: number, receiver_id: number }) => {
       this.handleNewChatMessage(data);
     });
-     
-    this.loadOldMessages(); 
+
+    this.loadOldMessages();
     this.checkOnlineStatus();
     this.loadUsers();
-  
-   
+
+
   }
 
   selectUser(user: any): void {
-    const previouslySelectedUser = this.selectedUser; 
+    const previouslySelectedUser = this.selectedUser;
     this.selectedUser = user;
     localStorage.removeItem('selectedUser');
     if (this.chatContainer && this.chatContainer.nativeElement) {
@@ -80,7 +79,7 @@ export class ChatComponent implements OnInit {
         localStorage.setItem('selectedUser', JSON.stringify(this.selectedUser));
       }
     }
-  
+
     if (previouslySelectedUser) {
       const previouslySelectedUserElement = document.querySelector(`[data-user-id="${previouslySelectedUser.id}"]`);
       if (previouslySelectedUserElement) {
@@ -93,8 +92,8 @@ export class ChatComponent implements OnInit {
       selectedUserElement.classList.add('selected');
     }
   }
-  
-  
+
+
 
 
   handleNewChatMessage(data: { message: string, sender_id: number, receiver_id: number }): void {
@@ -102,20 +101,20 @@ export class ChatComponent implements OnInit {
     this.cdr.detectChanges();
     localStorage.setItem('messages', JSON.stringify(this.messages));
   }
-  
+
 
   submit(): void {
     if (this.selectedUser) {
       console.log('Submit button clicked');
       console.log('Message:', this.message);
-  
+
       this.chatService.postMessage(this.message, this.selectedUser.id).subscribe(() => {
         console.log('Message sent successfully');
         this.message = '';
       });
     }
   }
-  
+
 
   loadUsers(): void {
     this.userService.getAllUsers().subscribe((data: any) => {
@@ -126,19 +125,19 @@ export class ChatComponent implements OnInit {
   checkOnlineStatus(): void {
     setInterval(() => {
       this.users.forEach(user => {
-        const threshold = new Date().getTime() - 10 * 60 * 1000; 
+        const threshold = new Date().getTime() - 10 * 60 * 1000;
         const lastSeenAt = new Date(user.last_seen_at).getTime();
         user.isOnline = lastSeenAt > threshold;
       });
-    }, 10000); 
+    }, 10000);
   }
 
 
     loadOldMessages(): void {
     if (this.authUser && this.selectedUser) {
       console.log('Loading old messages...');
-     let senderId = this.authUser.id; 
-     let receiverId = this.selectedUser.id; 
+     let senderId = this.authUser.id;
+     let receiverId = this.selectedUser.id;
       this.chatService.getMessages(senderId, receiverId).subscribe((data: any) => {
         console.log('Received messages:', data);
         this.messages = data;
@@ -156,6 +155,5 @@ export class ChatComponent implements OnInit {
     }
     return [];
   }
-  
-}
 
+}
